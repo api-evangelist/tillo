@@ -1,33 +1,42 @@
 aid: tillo
 name: Tillo
 description: >-
-  Effortlessly integrated, instantly impactful. Our award-winning gift card API
-  connects you to an expansive catalogue of 2,000  global brands. Just plug and
-  go. 
+  Award-winning gift card API connecting you to an expansive catalogue of 2,000+
+  global brands.
 type: Index
 position: Consumer
 access: 3rd-Party
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - API
+  - Gift Cards
+  - Rewards
+  - Payments
 created: '2025-02-08'
-modified: '2025-02-08'
+modified: '2026-03-16'
 url: >-
   https://raw.githubusercontent.com/api-evangelist/tillo/refs/heads/main/apis.yml
 specificationVersion: '0.19'
 apis:
   - aid: tillo:tillo
-    name: Tillo
+    name: Tillo Gift Card API
     description: >-
-      Effortlessly integrated, instantly impactful. Our award-winning gift card
-      API connects you to an expansive catalogue of 2,000  global brands. Just
-      plug and go. 
-    humanURL: ' https://www.tillo.io/gift-card-api'
+      Award-winning gift card API connecting you to an expansive catalogue of
+      2,000+ global brands.
+    humanURL: https://www.tillo.io/gift-card-api
     tags:
-      - API
+      - Gift Cards
+      - Rewards
+      - Payments
     properties:
       - type: Documentation
-        url: ' https://www.tillo.io/gift-card-api'
+        url: https://www.tillo.io/gift-card-api
+      - type: Website
+        url: https://www.tillo.io/
+common:
+  - type: Website
+    url: https://www.tillo.io/
+  - type: Documentation
+    url: https://www.tillo.io/gift-card-api
 maintainers:
   - FN: Kin Lane
-    email: info@apievangelist.com
+    email: kin@apievangelist.com
