@@ -9,8 +9,8 @@ access: 3rd-Party
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
   - Gift Cards
-  - Rewards
   - Payments
+  - Rewards
 created: '2025-02-08'
 modified: '2026-03-16'
 url: >-
@@ -25,8 +25,8 @@ apis:
     humanURL: https://www.tillo.io/gift-card-api
     tags:
       - Gift Cards
-      - Rewards
       - Payments
+      - Rewards
     properties:
       - type: Documentation
         url: https://www.tillo.io/gift-card-api
