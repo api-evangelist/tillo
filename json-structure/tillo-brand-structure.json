@@ -1,0 +1,16 @@
+{
+  "name": "Tillo Brand",
+  "description": "Structure of a Tillo gift card brand",
+  "fields": [
+    {"name": "identifier", "type": "string", "required": true, "description": "Brand slug"},
+    {"name": "name", "type": "string", "required": true, "description": "Brand name"},
+    {"name": "country", "type": "string", "required": false, "description": "Country code"},
+    {"name": "currency", "type": "string", "required": false, "description": "Currency code"},
+    {"name": "min_value", "type": "number", "required": false, "description": "Min denomination"},
+    {"name": "max_value", "type": "number", "required": false, "description": "Max denomination"},
+    {"name": "face_value", "type": "array<number>", "required": false, "description": "Fixed denominations"},
+    {"name": "async_only", "type": "boolean", "required": false, "description": "Async only brand"},
+    {"name": "transaction_types", "type": "array<string>", "required": false, "description": "Supported transaction types"},
+    {"name": "category", "type": "string", "required": false, "description": "Brand category"}
+  ]
+}

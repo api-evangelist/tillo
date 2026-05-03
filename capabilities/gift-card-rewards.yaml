@@ -1,0 +1,229 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Tillo Gift Card Rewards"
+  description: >-
+    Workflow capability for delivering gift card rewards and incentives at scale
+    using Tillo. Combines brand discovery, card issuance, balance checking, and
+    order management into a unified rewards workflow. Designed for loyalty
+    programs, employee rewards platforms, customer incentive tools, and
+    promotional campaigns.
+  tags:
+    - Tillo
+    - Gift Cards
+    - Rewards
+    - Incentives
+    - Loyalty
+    - Finance
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      TILLO_API_KEY: TILLO_API_KEY
+      TILLO_API_SECRET: TILLO_API_SECRET
+
+capability:
+  consumes:
+    - import: tillo-gift-cards
+      location: ./shared/gift-card-api.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: tillo-rewards-api
+      description: "Unified REST API for Tillo gift card rewards delivery."
+      resources:
+        - path: /v1/brands
+          name: brands
+          description: "Gift card brand catalog"
+          operations:
+            - method: GET
+              name: list-brands
+              description: "List available gift card brands"
+              call: "tillo-gift-cards.list-brands"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/brands/{brand_identifier}
+          name: brand-detail
+          description: "Brand details"
+          operations:
+            - method: GET
+              name: get-brand
+              description: "Get brand details including denominations and features"
+              call: "tillo-gift-cards.get-brand"
+              with:
+                brand_identifier: "rest.brand_identifier"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/rewards/issue
+          name: reward-issue
+          description: "Issue gift card rewards"
+          operations:
+            - method: POST
+              name: issue-digital-card
+              description: "Issue a digital gift card reward"
+              call: "tillo-gift-cards.issue-digital-card"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/rewards/order
+          name: reward-order
+          description: "Order async gift card rewards"
+          operations:
+            - method: POST
+              name: order-digital-card
+              description: "Order an async gift card reward"
+              call: "tillo-gift-cards.order-digital-card"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/rewards/{client_request_id}/status
+          name: reward-status
+          description: "Reward order status"
+          operations:
+            - method: GET
+              name: get-order-status
+              description: "Check status of a gift card reward order"
+              call: "tillo-gift-cards.get-order-status"
+              with:
+                client_request_id: "rest.client_request_id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/cards/balance
+          name: card-balance
+          description: "Gift card balance check"
+          operations:
+            - method: POST
+              name: check-balance
+              description: "Check remaining balance on a gift card"
+              call: "tillo-gift-cards.check-balance"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/cards/stock
+          name: card-stock
+          description: "Denomination availability"
+          operations:
+            - method: POST
+              name: check-stock
+              description: "Check denomination availability for a brand"
+              call: "tillo-gift-cards.check-stock"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/rewards/{client_request_id}/refund
+          name: reward-refund
+          description: "Refund issued rewards"
+          operations:
+            - method: POST
+              name: refund-order
+              description: "Refund a gift card order"
+              call: "tillo-gift-cards.refund-order"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/float
+          name: float-balance
+          description: "Float account management"
+          operations:
+            - method: GET
+              name: get-float-balance
+              description: "Get float account balances"
+              call: "tillo-gift-cards.get-float-balance"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: tillo-rewards-mcp
+      transport: http
+      description: "MCP server for AI-assisted Tillo gift card rewards delivery."
+      tools:
+        - name: list-brands
+          description: "List available Tillo gift card brands for reward selection"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "tillo-gift-cards.list-brands"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-brand
+          description: "Get gift card brand details including denominations and eligibility"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "tillo-gift-cards.get-brand"
+          with:
+            brand_identifier: "tools.brand_identifier"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: issue-digital-card
+          description: "Issue a digital gift card reward to a user"
+          hints:
+            readOnly: false
+            destructive: false
+          call: "tillo-gift-cards.issue-digital-card"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: order-digital-card
+          description: "Place an async gift card order for brands requiring asynchronous processing"
+          hints:
+            readOnly: false
+          call: "tillo-gift-cards.order-digital-card"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: check-balance
+          description: "Check remaining balance on a Tillo gift card"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "tillo-gift-cards.check-balance"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: check-stock
+          description: "Check denomination availability for a fixed-value gift card brand"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "tillo-gift-cards.check-stock"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-order-status
+          description: "Check the status of a gift card reward order"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "tillo-gift-cards.get-order-status"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: refund-order
+          description: "Refund a gift card order and return funds to float"
+          hints:
+            readOnly: false
+            destructive: false
+          call: "tillo-gift-cards.refund-order"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-float-balance
+          description: "Get current float account balances across all currencies"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "tillo-gift-cards.get-float-balance"
+          outputParameters:
+            - type: object
+              mapping: "$."

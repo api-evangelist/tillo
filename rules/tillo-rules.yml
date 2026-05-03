@@ -1,0 +1,73 @@
+extends: spectral:oas
+rules:
+  tillo-operation-id-camel-case:
+    description: Operation IDs must use camelCase
+    message: "Operation ID '{{value}}' must use camelCase"
+    severity: warn
+    given: "$.paths[*][*].operationId"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]*$"
+
+  tillo-versioned-paths:
+    description: All paths must be part of the v2 base URL
+    message: "Path '{{value}}' must use the /api/v2 base"
+    severity: info
+    given: "$.servers[*]"
+    then:
+      field: url
+      function: pattern
+      functionOptions:
+        match: ".*/v[0-9]+.*"
+
+  tillo-operation-summary:
+    description: All operations must have a summary
+    message: "Operation must have a summary"
+    severity: error
+    given: "$.paths[*][*]"
+    then:
+      field: summary
+      function: truthy
+
+  tillo-operation-tags:
+    description: All operations must have tags
+    message: "Operation must have at least one tag"
+    severity: warn
+    given: "$.paths[*][*]"
+    then:
+      field: tags
+      function: truthy
+
+  tillo-client-request-id:
+    description: >-
+      POST operations that issue or modify gift cards should include
+      client_request_id in the request body for idempotency
+    message: "POST operation should document client_request_id for idempotency"
+    severity: info
+    given: "$.paths[*][post]"
+    then:
+      function: truthy
+
+  tillo-status-in-response:
+    description: All successful responses should include a status field
+    message: "Response should include a 'status' field"
+    severity: warn
+    given: "$.paths[*][*].responses.200.content.application/json.schema.properties"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+
+  tillo-hmac-auth:
+    description: API must use HMAC authentication scheme
+    message: "API must define an HMAC authentication security scheme"
+    severity: error
+    given: "$.components.securitySchemes"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          minProperties: 1

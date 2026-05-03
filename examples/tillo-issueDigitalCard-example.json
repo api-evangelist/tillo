@@ -1,0 +1,31 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://app.tillo.io/api/v2/digital/issue",
+    "headers": {
+      "Authorization": "HMAC your-api-key:sha256-signature",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "client_request_id": "order-2026050312345",
+      "brand": "amazon-uk",
+      "face_value": 25.00,
+      "currency": "GBP",
+      "fulfilment_by": "client"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "status": "success",
+      "client_request_id": "order-2026050312345",
+      "tillo_order_id": "TL-98765432",
+      "code": "AMZN-1234-5678-9012",
+      "pin": null,
+      "face_value": 25.00,
+      "currency": "GBP",
+      "expiry_date": "2028-05-03",
+      "redemption_url": "https://www.amazon.co.uk/gc/redeem"
+    }
+  }
+}

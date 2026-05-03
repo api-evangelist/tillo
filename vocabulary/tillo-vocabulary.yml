@@ -1,0 +1,90 @@
+vocabulary:
+  name: Tillo Vocabulary
+  description: >-
+    Taxonomy and vocabulary for Tillo's gift card platform covering brands,
+    issuance, float management, fulfillment, and rewards concepts.
+  version: "2026-05-03"
+  terms:
+    - term: Brand
+      definition: >-
+        A retail or service entity whose gift cards are available through the
+        Tillo platform, identified by a unique slug.
+      category: Products
+      tags: [Brands, Catalog]
+    - term: Face Value
+      definition: >-
+        The monetary denomination of a gift card (e.g., £25). May be fixed or
+        variable depending on the brand.
+      category: Products
+      tags: [Gift Cards, Pricing]
+    - term: Client Request ID
+      definition: >-
+        A unique identifier supplied by the client for each API request to
+        ensure idempotency and prevent duplicate orders.
+      category: API
+      tags: [API, Idempotency]
+    - term: Tillo Order ID
+      definition: >-
+        Tillo's internal reference number for a completed gift card order.
+      category: Orders
+      tags: [Orders, Reference]
+    - term: Float
+      definition: >-
+        A pre-funded account balance held by Tillo on behalf of a client,
+        used to fund gift card purchases.
+      category: Finance
+      tags: [Finance, Payments]
+    - term: Async Only
+      definition: >-
+        A brand attribute indicating that orders must be processed
+        asynchronously rather than in real-time.
+      category: Products
+      tags: [Brands, Processing]
+    - term: HMAC
+      definition: >-
+        Hash-based Message Authentication Code - the authentication method
+        used by Tillo API. Signatures combine the API key, method, endpoint,
+        request ID, brand, and timestamp.
+      category: Authentication
+      tags: [Authentication, Security]
+    - term: Transaction Types
+      definition: >-
+        The set of operations supported by a brand: issue, balance_check,
+        top_up, and refund.
+      category: Products
+      tags: [Brands, Operations]
+    - term: Balance Check
+      definition: >-
+        An API operation to query the remaining monetary value on a specific
+        gift card code. Not available for all brands.
+      category: Operations
+      tags: [Gift Cards, Balance]
+    - term: Stock Check
+      definition: >-
+        An API operation to verify whether specific denominations are currently
+        available for a fixed-value brand.
+      category: Operations
+      tags: [Gift Cards, Inventory]
+    - term: Fulfilment
+      definition: >-
+        The delivery of a gift card to the end recipient. Can be fulfilled by
+        Tillo (via email) or by the client.
+      category: Operations
+      tags: [Fulfillment, Delivery]
+    - term: Redemption URL
+      definition: >-
+        A URL where a digital gift card can be redeemed by the recipient.
+      category: Products
+      tags: [Gift Cards, Redemption]
+    - term: Incentives
+      definition: >-
+        Digital rewards or motivational tools distributed to customers,
+        employees, or partners to drive desired behaviors.
+      category: Use Cases
+      tags: [Rewards, Marketing]
+    - term: Payment Transfer
+      definition: >-
+        A request to add funds to a float account to maintain sufficient
+        balance for gift card issuance.
+      category: Finance
+      tags: [Finance, Float]

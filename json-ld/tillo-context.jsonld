@@ -1,0 +1,21 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "tillo": "https://www.tillo.io/vocab/",
+    "identifier": "identifier",
+    "brand_identifier": "tillo:brandIdentifier",
+    "face_value": "price",
+    "currency": "priceCurrency",
+    "redemption_url": "url",
+    "expiry_date": "expires",
+    "client_request_id": "tillo:clientRequestId",
+    "tillo_order_id": "tillo:tilloOrderId",
+    "float_balance": "tillo:floatBalance",
+    "async_only": "tillo:asyncOnly",
+    "transaction_types": "tillo:transactionTypes",
+    "TilloBrand": "Brand",
+    "TilloGiftCard": "tillo:GiftCard",
+    "TilloOrder": "Order",
+    "TilloFloat": "tillo:FloatAccount"
+  }
+}

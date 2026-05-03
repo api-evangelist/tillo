@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/tillo/main/json-schema/tillo-brand-schema.json",
+  "title": "Tillo Brand",
+  "description": "Schema for a Tillo gift card brand",
+  "type": "object",
+  "properties": {
+    "name": {"type": "string", "description": "Brand display name"},
+    "identifier": {"type": "string", "description": "Unique brand slug"},
+    "country": {"type": "string", "description": "ISO 3166-1 alpha-2 country code"},
+    "currency": {"type": "string", "description": "ISO 4217 currency code"},
+    "min_value": {"type": "number", "minimum": 0, "description": "Minimum denomination"},
+    "max_value": {"type": "number", "minimum": 0, "description": "Maximum denomination"},
+    "face_value": {"type": "array", "items": {"type": "number"}, "description": "Fixed denominations"},
+    "async_only": {"type": "boolean", "description": "Requires async ordering"},
+    "transaction_types": {
+      "type": "array",
+      "items": {"type": "string", "enum": ["issue", "balance_check", "top_up", "refund"]},
+      "description": "Supported transaction types"
+    },
+    "category": {"type": "string", "description": "Brand category"},
+    "logo_url": {"type": "string", "format": "uri", "description": "Brand logo URL"},
+    "terms_and_conditions_copy": {"type": "string", "description": "Brand T&C text"}
+  },
+  "required": ["identifier", "name"]
+}

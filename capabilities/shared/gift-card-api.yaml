@@ -1,0 +1,347 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Tillo Gift Card API"
+  description: >-
+    Tillo Gift Card API for issuing digital and physical gift cards from 4,000+
+    global brands, checking balances, managing orders, and accessing brand
+    catalogs.
+  tags:
+    - Tillo
+    - Gift Cards
+    - Payments
+    - Rewards
+    - Finance
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      TILLO_API_KEY: TILLO_API_KEY
+      TILLO_API_SECRET: TILLO_API_SECRET
+
+capability:
+  consumes:
+    - type: http
+      namespace: tillo-gift-cards
+      baseUri: https://app.tillo.io/api/v2
+      description: "Tillo Gift Card API"
+      authentication:
+        type: apikey
+        key: Authorization
+        value: "HMAC {{TILLO_API_KEY}}:{{signature}}"
+        placement: header
+      resources:
+        - name: brands
+          path: /brands
+          description: "Gift card brand catalog"
+          operations:
+            - name: list-brands
+              method: GET
+              description: "List available gift card brands"
+              inputParameters:
+                - name: country
+                  in: query
+                  type: string
+                  required: false
+                - name: currency
+                  in: query
+                  type: string
+                  required: false
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-brand
+              method: GET
+              description: "Get brand details by identifier"
+              inputParameters:
+                - name: brand_identifier
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: digital-cards
+          path: /digital
+          description: "Digital gift card operations"
+          operations:
+            - name: issue-digital-card
+              method: POST
+              description: "Synchronously issue a digital gift card"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  client_request_id: "{{tools.client_request_id}}"
+                  brand: "{{tools.brand}}"
+                  face_value: "{{tools.face_value}}"
+                  currency: "{{tools.currency}}"
+                  fulfilment_by: "{{tools.fulfilment_by}}"
+            - name: order-digital-card
+              method: POST
+              description: "Asynchronously order a digital gift card"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  client_request_id: "{{tools.client_request_id}}"
+                  brand: "{{tools.brand}}"
+                  face_value: "{{tools.face_value}}"
+                  currency: "{{tools.currency}}"
+            - name: check-balance
+              method: POST
+              description: "Check remaining balance on a gift card"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  client_request_id: "{{tools.client_request_id}}"
+                  brand: "{{tools.brand}}"
+                  code: "{{tools.code}}"
+                  currency: "{{tools.currency}}"
+            - name: check-stock
+              method: POST
+              description: "Check denomination availability for fixed-value brands"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  brand: "{{tools.brand}}"
+            - name: refund-order
+              method: POST
+              description: "Refund a completed gift card order"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  client_request_id: "{{tools.client_request_id}}"
+                  brand: "{{tools.brand}}"
+                  amount: "{{tools.amount}}"
+        - name: orders
+          path: /order-status
+          description: "Order status tracking"
+          operations:
+            - name: get-order-status
+              method: GET
+              description: "Get status of a gift card order"
+              inputParameters:
+                - name: client_request_id
+                  in: query
+                  type: string
+                  required: true
+                - name: brand
+                  in: query
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: float
+          path: /float
+          description: "Float account management"
+          operations:
+            - name: get-float-balance
+              method: GET
+              description: "Get float account balances"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: request-payment-transfer
+              method: POST
+              description: "Request a payment transfer to top up float"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  amount: "{{tools.amount}}"
+                  currency: "{{tools.currency}}"
+
+  exposes:
+    - type: rest
+      port: 8100
+      namespace: tillo-gift-cards-rest
+      resources:
+        - path: /v1/brands
+          name: brands
+          operations:
+            - method: GET
+              name: list-brands
+              description: "List available gift card brands"
+              call: "tillo-gift-cards.list-brands"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/brands/{brand_identifier}
+          name: brand-detail
+          operations:
+            - method: GET
+              name: get-brand
+              description: "Get gift card brand details"
+              call: "tillo-gift-cards.get-brand"
+              with:
+                brand_identifier: "rest.brand_identifier"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/cards/issue
+          name: card-issue
+          operations:
+            - method: POST
+              name: issue-digital-card
+              description: "Issue a digital gift card"
+              call: "tillo-gift-cards.issue-digital-card"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/cards/balance
+          name: card-balance
+          operations:
+            - method: POST
+              name: check-balance
+              description: "Check gift card balance"
+              call: "tillo-gift-cards.check-balance"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/orders/status
+          name: order-status
+          operations:
+            - method: GET
+              name: get-order-status
+              description: "Get order status"
+              call: "tillo-gift-cards.get-order-status"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/float
+          name: float-balance
+          operations:
+            - method: GET
+              name: get-float-balance
+              description: "Get float account balance"
+              call: "tillo-gift-cards.get-float-balance"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9100
+      namespace: tillo-gift-cards-mcp
+      transport: http
+      tools:
+        - name: list-brands
+          description: "List available Tillo gift card brands with filtering"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "tillo-gift-cards.list-brands"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-brand
+          description: "Get detailed information for a specific gift card brand"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "tillo-gift-cards.get-brand"
+          with:
+            brand_identifier: "tools.brand_identifier"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: issue-digital-card
+          description: "Synchronously issue a digital gift card to a user"
+          hints:
+            readOnly: false
+            destructive: false
+          call: "tillo-gift-cards.issue-digital-card"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: order-digital-card
+          description: "Asynchronously order a digital gift card for async brands"
+          hints:
+            readOnly: false
+          call: "tillo-gift-cards.order-digital-card"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: check-balance
+          description: "Check remaining balance on a gift card code"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "tillo-gift-cards.check-balance"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: check-stock
+          description: "Check denomination availability for a gift card brand"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "tillo-gift-cards.check-stock"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-order-status
+          description: "Get the status of a previously placed gift card order"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "tillo-gift-cards.get-order-status"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: refund-order
+          description: "Refund a completed gift card order to the float account"
+          hints:
+            readOnly: false
+            destructive: false
+          call: "tillo-gift-cards.refund-order"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-float-balance
+          description: "Get real-time float account balances and pending transfers"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "tillo-gift-cards.get-float-balance"
+          outputParameters:
+            - type: object
+              mapping: "$."

@@ -1,0 +1,42 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://app.tillo.io/api/v2/brands?country=GB&currency=GBP",
+    "headers": {
+      "Authorization": "HMAC your-api-key:signature",
+      "Content-Type": "application/json"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "status": "success",
+      "brands": [
+        {
+          "name": "Amazon",
+          "identifier": "amazon-uk",
+          "country": "GB",
+          "currency": "GBP",
+          "min_value": 0.01,
+          "max_value": 2000.00,
+          "async_only": false,
+          "transaction_types": ["issue", "balance_check", "refund"],
+          "category": "Shopping",
+          "logo_url": "https://cdn.tillo.tech/brands/amazon-uk.png"
+        },
+        {
+          "name": "Marks & Spencer",
+          "identifier": "marks-and-spencer",
+          "country": "GB",
+          "currency": "GBP",
+          "min_value": 5.00,
+          "max_value": 500.00,
+          "face_value": [10, 20, 25, 50, 100, 250, 500],
+          "async_only": false,
+          "transaction_types": ["issue", "balance_check"],
+          "category": "Retail"
+        }
+      ]
+    }
+  }
+}

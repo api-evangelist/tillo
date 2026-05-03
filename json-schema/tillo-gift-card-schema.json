@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/tillo/main/json-schema/tillo-gift-card-schema.json",
+  "title": "Tillo Gift Card",
+  "description": "Schema for an issued Tillo gift card",
+  "type": "object",
+  "properties": {
+    "client_request_id": {"type": "string", "description": "Client idempotency key"},
+    "tillo_order_id": {"type": "string", "description": "Tillo internal order ID"},
+    "status": {"type": "string", "enum": ["success", "pending", "error", "cancelled"]},
+    "brand": {"type": "string", "description": "Brand identifier slug"},
+    "face_value": {"type": "number", "minimum": 0, "description": "Gift card value"},
+    "currency": {"type": "string", "description": "ISO 4217 currency code"},
+    "code": {"type": "string", "description": "Redemption code"},
+    "pin": {"type": "string", "description": "PIN if applicable"},
+    "barcode": {"type": "string", "description": "Barcode value"},
+    "redemption_url": {"type": "string", "format": "uri", "description": "Digital redemption URL"},
+    "expiry_date": {"type": "string", "description": "Card expiry date"}
+  },
+  "required": ["client_request_id", "status"]
+}
