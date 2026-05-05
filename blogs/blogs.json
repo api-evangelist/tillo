@@ -1,0 +1,13 @@
+{
+  "repo": "tillo",
+  "feeds": [
+    {
+      "source": "https://www.tillo.io/blog",
+      "feed_url": "https://www.tillo.com/blog/rss.xml",
+      "saved": 10,
+      "title": "Tillo insights"
+    }
+  ],
+  "post_count": 10,
+  "fetched": "2026-05-03T23:37:29Z"
+}
