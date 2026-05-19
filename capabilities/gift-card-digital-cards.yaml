@@ -1,0 +1,166 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Tillo Gift Card API — Digital Cards
+  description: 'Tillo Gift Card API — Digital Cards. 3 operations. Lead operation: Check Stock Availability. Self-contained
+    Naftiko capability covering one Tillo business surface.'
+  tags:
+  - Tillo
+  - Digital Cards
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    TILLO_API_KEY: TILLO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: gift-card-digital-cards
+    baseUri: https://app.tillo.io/api/v2
+    description: Tillo Gift Card API — Digital Cards business capability. Self-contained, no shared references.
+    resources:
+    - name: digital-check-stock
+      path: /digital/check-stock
+      operations:
+      - name: checkstock
+        method: POST
+        description: Check Stock Availability
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: digital-issue
+      path: /digital/issue
+      operations:
+      - name: issuedigitalcard
+        method: POST
+        description: Issue Digital Gift Card
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: digital-order
+      path: /digital/order
+      operations:
+      - name: orderdigitalcard
+        method: POST
+        description: Order Digital Gift Card (Async)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.TILLO_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: gift-card-digital-cards-rest
+    port: 8080
+    description: REST adapter for Tillo Gift Card API — Digital Cards. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/digital/check-stock
+      name: digital-check-stock
+      description: REST surface for digital-check-stock.
+      operations:
+      - method: POST
+        name: checkstock
+        description: Check Stock Availability
+        call: gift-card-digital-cards.checkstock
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/digital/issue
+      name: digital-issue
+      description: REST surface for digital-issue.
+      operations:
+      - method: POST
+        name: issuedigitalcard
+        description: Issue Digital Gift Card
+        call: gift-card-digital-cards.issuedigitalcard
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/digital/order
+      name: digital-order
+      description: REST surface for digital-order.
+      operations:
+      - method: POST
+        name: orderdigitalcard
+        description: Order Digital Gift Card (Async)
+        call: gift-card-digital-cards.orderdigitalcard
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: gift-card-digital-cards-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Tillo Gift Card API — Digital Cards. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: check-stock-availability
+      description: Check Stock Availability
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: gift-card-digital-cards.checkstock
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: issue-digital-gift-card
+      description: Issue Digital Gift Card
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gift-card-digital-cards.issuedigitalcard
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: order-digital-gift-card-async
+      description: Order Digital Gift Card (Async)
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gift-card-digital-cards.orderdigitalcard
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
