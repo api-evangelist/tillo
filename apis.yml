@@ -8,88 +8,90 @@ position: Consumer
 access: 3rd-Party
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-- Finance
-- Gift Cards
-- Payments
-- Rewards
-- Incentives
+  - Finance
+  - Gift Cards
+  - Payments
+  - Rewards
+  - Incentives
 created: '2025-02-08'
 modified: '2026-05-19'
 url: https://raw.githubusercontent.com/api-evangelist/tillo/refs/heads/main/apis.yml
 specificationVersion: '0.19'
 apis:
-- aid: tillo:tillo-gift-card-api
-  name: Tillo Gift Card API
-  description: The Tillo Gift Card API enables businesses to issue digital and physical gift cards from 4,000+ global brands.
-    Supports synchronous and asynchronous card issuance, balance checking, refunds, order status checking, and brand catalog
-    retrieval.
-  humanURL: https://www.tillo.io/gift-card-api
-  baseURL: https://app.tillo.io
-  tags:
-  - Finance
-  - Gift Cards
-  - Payments
-  - Rewards
-  properties:
+  - aid: tillo:tillo-gift-card-api
+    name: Tillo Gift Card API
+    description: The Tillo Gift Card API enables businesses to issue digital and physical gift cards from 4,000+ global brands.
+      Supports synchronous and asynchronous card issuance, balance checking, refunds, order status checking, and brand catalog
+      retrieval.
+    humanURL: https://www.tillo.io/gift-card-api
+    baseURL: https://app.tillo.io
+    tags:
+    - Finance
+    - Gift Cards
+    - Payments
+    - Rewards
+    properties:
+    - type: Documentation
+      url: https://tillo.tech/v2_docs/
+    - type: OpenAPI
+      url: https://raw.githubusercontent.com/api-evangelist/tillo/refs/heads/main/openapi/tillo-gift-card-openapi.yml
+    - type: NaftikoCapability
+      url: capabilities/gift-card-balance.yaml
+    - type: NaftikoCapability
+      url: capabilities/gift-card-brands.yaml
+    - type: NaftikoCapability
+      url: capabilities/gift-card-digital-cards.yaml
+    - type: NaftikoCapability
+      url: capabilities/gift-card-float.yaml
+    - type: NaftikoCapability
+      url: capabilities/gift-card-orders.yaml
+  - aid: tillo:tillo-float-api
+    name: Tillo Float Management API
+    description: Manages Tillo float accounts including balance retrieval, payment transfer requests, and transfer status tracking.
+    humanURL: https://tillo.tech/v2_docs/floats.html
+    baseURL: https://app.tillo.io
+    tags:
+    - Finance
+    - Float
+    - Payments
+    properties:
+    - type: Documentation
+      url: https://tillo.tech/v2_docs/floats.html
+    - type: OpenAPI
+      url: https://raw.githubusercontent.com/api-evangelist/tillo/refs/heads/main/openapi/tillo-gift-card-openapi.yml
+common:
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/tillo
+  - type: Website
+    url: https://www.tillo.io/
+  - type: Portal
+    url: https://www.tillo.io/gift-card-api
   - type: Documentation
     url: https://tillo.tech/v2_docs/
-  - type: OpenAPI
-    url: https://raw.githubusercontent.com/api-evangelist/tillo/refs/heads/main/openapi/tillo-gift-card-openapi.yml
-  - type: NaftikoCapability
-    url: capabilities/gift-card-balance.yaml
-  - type: NaftikoCapability
-    url: capabilities/gift-card-brands.yaml
-  - type: NaftikoCapability
-    url: capabilities/gift-card-digital-cards.yaml
-  - type: NaftikoCapability
-    url: capabilities/gift-card-float.yaml
-  - type: NaftikoCapability
-    url: capabilities/gift-card-orders.yaml
-- aid: tillo:tillo-float-api
-  name: Tillo Float Management API
-  description: Manages Tillo float accounts including balance retrieval, payment transfer requests, and transfer status tracking.
-  humanURL: https://tillo.tech/v2_docs/floats.html
-  baseURL: https://app.tillo.io
-  tags:
-  - Finance
-  - Float
-  - Payments
-  properties:
-  - type: Documentation
-    url: https://tillo.tech/v2_docs/floats.html
-  - type: OpenAPI
-    url: https://raw.githubusercontent.com/api-evangelist/tillo/refs/heads/main/openapi/tillo-gift-card-openapi.yml
-common:
-- type: Website
-  url: https://www.tillo.io/
-- type: Portal
-  url: https://www.tillo.io/gift-card-api
-- type: Documentation
-  url: https://tillo.tech/v2_docs/
-- type: GettingStarted
-  url: https://tillo.tech/v2_docs/getting_started.html
-- type: Authentication
-  url: https://tillo.tech/v2_docs/authentication.html
-- type: GitHubOrganization
-  url: https://github.com/tilloops
-- type: GitHubRepository
-  url: https://github.com/tilloops/tillo
-- type: Blog
-  url: https://www.tillo.io/blog
-- type: Contact
-  url: https://www.tillo.io/contact
-- type: Pricing
-  url: https://www.tillo.io/pricing
-- type: TermsOfService
-  url: https://www.tillo.io/legal
-- type: Postman Collection
-  url: https://api.tillo.tech/
-- type: SignUp
-  url: https://app.tillo.io/
-- type: Use Cases
-  url: https://www.tillo.io/
-- type: Integrations
-  url: https://www.tillo.io/partners
+  - type: GettingStarted
+    url: https://tillo.tech/v2_docs/getting_started.html
+  - type: Authentication
+    url: https://tillo.tech/v2_docs/authentication.html
+  - type: GitHubOrganization
+    url: https://github.com/tilloops
+  - type: GitHubRepository
+    url: https://github.com/tilloops/tillo
+  - type: Blog
+    url: https://www.tillo.io/blog
+  - type: Contact
+    url: https://www.tillo.io/contact
+  - type: Pricing
+    url: https://www.tillo.io/pricing
+  - type: TermsOfService
+    url: https://www.tillo.io/legal
+  - type: Postman Collection
+    url: https://api.tillo.tech/
+  - type: SignUp
+    url: https://app.tillo.io/
+  - type: Use Cases
+    url: https://www.tillo.io/
+  - type: Integrations
+    url: https://www.tillo.io/partners
 maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
+  - FN: Kin Lane
+    email: kin@apievangelist.com
