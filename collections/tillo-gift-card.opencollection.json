@@ -1,0 +1,266 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tillo Gift Card API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Brands",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Brands",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.tillo.io/api/v2/brands",
+            "params": [
+              {
+                "name": "country",
+                "value": "",
+                "type": "query",
+                "description": "Filter by ISO 3166-1 alpha-2 country code (e.g., GB, US)"
+              },
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "Filter by ISO 4217 currency code (e.g., GBP, USD)"
+              },
+              {
+                "name": "async_only",
+                "value": "",
+                "type": "query",
+                "description": "Filter to async-only brands"
+              },
+              {
+                "name": "category",
+                "value": "",
+                "type": "query",
+                "description": "Filter by brand category"
+              }
+            ]
+          },
+          "docs": "Retrieves the list of gift card brands available to your account, including brand metadata, supported denominations, transaction types, and currency information."
+        },
+        {
+          "info": {
+            "name": "Get Brand",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.tillo.io/api/v2/brands/:brand_identifier",
+            "params": [
+              {
+                "name": "brand_identifier",
+                "value": "",
+                "type": "path",
+                "description": "Unique brand slug/identifier"
+              }
+            ]
+          },
+          "docs": "Retrieves detailed information for a specific brand by its identifier slug."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Digital Cards",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Issue Digital Gift Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.tillo.io/api/v2/digital/issue",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Synchronously issues a digital gift card for a specific brand and denomination. Returns a gift card code or URL immediately."
+        },
+        {
+          "info": {
+            "name": "Order Digital Gift Card (Async)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.tillo.io/api/v2/digital/order",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Asynchronously orders a digital gift card. Used for brands that require asynchronous processing. Returns a status and order reference."
+        },
+        {
+          "info": {
+            "name": "Check Stock Availability",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.tillo.io/api/v2/digital/check-stock",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Checks current denomination availability for fixed-denomination brands."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Balance",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Check Gift Card Balance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.tillo.io/api/v2/digital/check-balance",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Checks the remaining balance on a specific gift card. Only available for brands that support balance_check in their transaction_types."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Cancel Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.tillo.io/api/v2/digital/cancel",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cancels a pending or errored gift card order."
+        },
+        {
+          "info": {
+            "name": "Refund Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.tillo.io/api/v2/digital/refund",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Refunds a completed gift card order. Funds are returned to the float."
+        },
+        {
+          "info": {
+            "name": "Get Order Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.tillo.io/api/v2/order-status",
+            "params": [
+              {
+                "name": "client_request_id",
+                "value": "",
+                "type": "query",
+                "description": "Client-supplied request ID"
+              },
+              {
+                "name": "brand",
+                "value": "",
+                "type": "query",
+                "description": "Brand identifier slug"
+              }
+            ]
+          },
+          "docs": "Retrieves the status of a previously placed order using the client request ID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Float",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Float Balance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.tillo.io/api/v2/float"
+          },
+          "docs": "Retrieves real-time balance of float accounts and pending payment transfers."
+        },
+        {
+          "info": {
+            "name": "Request Payment Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.tillo.io/api/v2/float/request-payment-transfer",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Requests a payment transfer to top up a float account."
+        },
+        {
+          "info": {
+            "name": "List Transfer Requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.tillo.io/api/v2/float/transfer-requests"
+          },
+          "docs": "Lists pending and completed float payment transfer requests."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
