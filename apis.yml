@@ -76,11 +76,11 @@ common:
     url: https://www.tillo.io/pricing
   - type: TermsOfService
     url: https://www.tillo.io/legal
-  - type: Postman Collection
+  - type: PostmanCollection
     url: https://api.tillo.tech/
-  - type: SignUp
+  - type: Signup
     url: https://app.tillo.io/
-  - type: Use Cases
+  - type: UseCases
     url: https://www.tillo.io/
   - type: Integrations
     url: https://www.tillo.io/partners
