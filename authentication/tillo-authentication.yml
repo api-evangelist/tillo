@@ -1,0 +1,18 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/tillo-gift-card-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: HMACAuth
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: HMAC-SHA256 signature. Signature is built from API Key, HTTP Method, Endpoint,
+    Client Request ID, Brand Identifier, and UTC Timestamp (ms), concatenated with hyphens and
+    hashed with your API Secret.
+  sources:
+  - openapi/tillo-gift-card-openapi.yml

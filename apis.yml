@@ -52,6 +52,10 @@ apis:
       - type: OpenAPI
         url: https://raw.githubusercontent.com/api-evangelist/tillo/refs/heads/main/openapi/tillo-gift-card-openapi.yml
 common:
+  - type: DomainSecurity
+    url: security/tillo-domain-security.yml
+  - type: Authentication
+    url: authentication/tillo-authentication.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/tillo
   - type: Website
