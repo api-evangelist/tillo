@@ -1,0 +1,191 @@
+openapi: 3.1.0
+info:
+  title: Tillo Gift Card Balance Digital Cards API
+  description: The Tillo Gift Card API enables businesses to issue digital and physical gift cards from 4,000+ global brands across 37 markets and 16 currencies. Supports synchronous and asynchronous card issuance, balance checking, stock checking, refunds, order status, float management, and brand catalog access. Authentication uses HMAC-SHA256 signatures.
+  version: v2
+  contact:
+    name: Tillo Support
+    url: https://www.tillo.io/
+    email: onboarding@tillo.io
+  termsOfService: https://www.tillo.io/legal
+servers:
+- url: https://app.tillo.io/api/v2
+  description: Tillo Production API
+security:
+- HMACAuth: []
+tags:
+- name: Digital Cards
+  description: Digital gift card issuance
+paths:
+  /digital/issue:
+    post:
+      operationId: issueDigitalCard
+      summary: Issue Digital Gift Card
+      description: Synchronously issues a digital gift card for a specific brand and denomination. Returns a gift card code or URL immediately.
+      tags:
+      - Digital Cards
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IssueCardRequest'
+      responses:
+        '200':
+          description: Gift card issued successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DigitalCardResponse'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+  /digital/order:
+    post:
+      operationId: orderDigitalCard
+      summary: Order Digital Gift Card (Async)
+      description: Asynchronously orders a digital gift card. Used for brands that require asynchronous processing. Returns a status and order reference.
+      tags:
+      - Digital Cards
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IssueCardRequest'
+      responses:
+        '200':
+          description: Order accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncOrderResponse'
+  /digital/check-stock:
+    post:
+      operationId: checkStock
+      summary: Check Stock Availability
+      description: Checks current denomination availability for fixed-denomination brands.
+      tags:
+      - Digital Cards
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - brand
+              properties:
+                brand:
+                  type: string
+                  description: Brand identifier slug
+      responses:
+        '200':
+          description: Stock availability returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StockResponse'
+components:
+  schemas:
+    StockResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        denominations:
+          type: array
+          items:
+            type: object
+            properties:
+              value:
+                type: number
+              available:
+                type: boolean
+              stock_count:
+                type: integer
+    DigitalCardResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - success
+          - error
+        code:
+          type: string
+          description: Gift card redemption code
+        barcode:
+          type: string
+          description: Barcode value if applicable
+        pin:
+          type: string
+          description: PIN if applicable
+        redemption_url:
+          type: string
+          description: URL for digital redemption
+        expiry_date:
+          type: string
+          description: Card expiry date
+        face_value:
+          type: number
+        currency:
+          type: string
+        client_request_id:
+          type: string
+        tillo_order_id:
+          type: string
+    IssueCardRequest:
+      type: object
+      required:
+      - client_request_id
+      - brand
+      - face_value
+      - currency
+      properties:
+        client_request_id:
+          type: string
+          description: Unique client-generated request ID (idempotency key)
+        brand:
+          type: string
+          description: Brand identifier slug
+        face_value:
+          type: number
+          description: Denomination value of the gift card
+        currency:
+          type: string
+          description: ISO 4217 currency code
+        fulfilment_by:
+          type: string
+          enum:
+          - tillo
+          - client
+          description: Whether Tillo or the client fulfils delivery
+        fulfilment_parameters:
+          type: object
+          description: Delivery parameters (email, name, etc.)
+        personalisation:
+          type: object
+          description: Personalisation details for the card
+        sector:
+          type: string
+          description: Sector context for the order
+    AsyncOrderResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - pending
+          - error
+        client_request_id:
+          type: string
+        message:
+          type: string
+  securitySchemes:
+    HMACAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: HMAC-SHA256 signature. Signature is built from API Key, HTTP Method, Endpoint, Client Request ID, Brand Identifier, and UTC Timestamp (ms), concatenated with hyphens and hashed with your API Secret.

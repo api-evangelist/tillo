@@ -1,0 +1,155 @@
+openapi: 3.1.0
+info:
+  title: Tillo Gift Card Balance Brands API
+  description: The Tillo Gift Card API enables businesses to issue digital and physical gift cards from 4,000+ global brands across 37 markets and 16 currencies. Supports synchronous and asynchronous card issuance, balance checking, stock checking, refunds, order status, float management, and brand catalog access. Authentication uses HMAC-SHA256 signatures.
+  version: v2
+  contact:
+    name: Tillo Support
+    url: https://www.tillo.io/
+    email: onboarding@tillo.io
+  termsOfService: https://www.tillo.io/legal
+servers:
+- url: https://app.tillo.io/api/v2
+  description: Tillo Production API
+security:
+- HMACAuth: []
+tags:
+- name: Brands
+  description: Brand catalog and information
+paths:
+  /brands:
+    get:
+      operationId: listBrands
+      summary: List Brands
+      description: Retrieves the list of gift card brands available to your account, including brand metadata, supported denominations, transaction types, and currency information.
+      tags:
+      - Brands
+      parameters:
+      - name: country
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Filter by ISO 3166-1 alpha-2 country code (e.g., GB, US)
+      - name: currency
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Filter by ISO 4217 currency code (e.g., GBP, USD)
+      - name: async_only
+        in: query
+        required: false
+        schema:
+          type: boolean
+        description: Filter to async-only brands
+      - name: category
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Filter by brand category
+      responses:
+        '200':
+          description: Brand list returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrandListResponse'
+        '401':
+          description: Unauthorized - Invalid HMAC signature
+  /brands/{brand_identifier}:
+    get:
+      operationId: getBrand
+      summary: Get Brand
+      description: Retrieves detailed information for a specific brand by its identifier slug.
+      tags:
+      - Brands
+      parameters:
+      - name: brand_identifier
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique brand slug/identifier
+      responses:
+        '200':
+          description: Brand details returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrandDetailResponse'
+        '404':
+          description: Brand not found
+components:
+  schemas:
+    BrandListResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        brands:
+          type: array
+          items:
+            $ref: '#/components/schemas/Brand'
+    BrandDetailResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        brand:
+          $ref: '#/components/schemas/Brand'
+    Brand:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Brand display name
+        identifier:
+          type: string
+          description: Unique brand slug
+        country:
+          type: string
+          description: ISO 3166-1 alpha-2 country code
+        currency:
+          type: string
+          description: ISO 4217 currency code
+        min_value:
+          type: number
+          description: Minimum denomination
+        max_value:
+          type: number
+          description: Maximum denomination
+        face_value:
+          type: array
+          items:
+            type: number
+          description: Fixed denominations (for fixed-value brands)
+        async_only:
+          type: boolean
+          description: Whether this brand requires asynchronous ordering
+        transaction_types:
+          type: array
+          items:
+            type: string
+            enum:
+            - issue
+            - balance_check
+            - top_up
+            - refund
+          description: Supported transaction types
+        category:
+          type: string
+          description: Brand category
+        logo_url:
+          type: string
+          description: URL of brand logo
+        terms_and_conditions_copy:
+          type: string
+          description: Brand T&C text
+  securitySchemes:
+    HMACAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: HMAC-SHA256 signature. Signature is built from API Key, HTTP Method, Endpoint, Client Request ID, Brand Identifier, and UTC Timestamp (ms), concatenated with hyphens and hashed with your API Secret.

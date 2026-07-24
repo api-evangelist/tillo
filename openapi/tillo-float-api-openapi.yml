@@ -1,0 +1,134 @@
+openapi: 3.1.0
+info:
+  title: Tillo Gift Card Balance Float API
+  description: The Tillo Gift Card API enables businesses to issue digital and physical gift cards from 4,000+ global brands across 37 markets and 16 currencies. Supports synchronous and asynchronous card issuance, balance checking, stock checking, refunds, order status, float management, and brand catalog access. Authentication uses HMAC-SHA256 signatures.
+  version: v2
+  contact:
+    name: Tillo Support
+    url: https://www.tillo.io/
+    email: onboarding@tillo.io
+  termsOfService: https://www.tillo.io/legal
+servers:
+- url: https://app.tillo.io/api/v2
+  description: Tillo Production API
+security:
+- HMACAuth: []
+tags:
+- name: Float
+  description: Float account management
+paths:
+  /float:
+    get:
+      operationId: getFloatBalance
+      summary: Get Float Balance
+      description: Retrieves real-time balance of float accounts and pending payment transfers.
+      tags:
+      - Float
+      responses:
+        '200':
+          description: Float balance returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FloatBalanceResponse'
+  /float/request-payment-transfer:
+    post:
+      operationId: requestPaymentTransfer
+      summary: Request Payment Transfer
+      description: Requests a payment transfer to top up a float account.
+      tags:
+      - Float
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentTransferRequest'
+      responses:
+        '200':
+          description: Transfer request submitted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+  /float/transfer-requests:
+    get:
+      operationId: listTransferRequests
+      summary: List Transfer Requests
+      description: Lists pending and completed float payment transfer requests.
+      tags:
+      - Float
+      responses:
+        '200':
+          description: Transfer requests returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransferRequestsResponse'
+components:
+  schemas:
+    FloatBalance:
+      type: object
+      properties:
+        currency:
+          type: string
+        balance:
+          type: number
+        pending_transfers:
+          type: number
+    PaymentTransferRequest:
+      type: object
+      required:
+      - amount
+      - currency
+      properties:
+        amount:
+          type: number
+          description: Amount to transfer
+        currency:
+          type: string
+          description: ISO 4217 currency code
+    TransferRequestsResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        transfer_requests:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              amount:
+                type: number
+              currency:
+                type: string
+              status:
+                type: string
+              created_at:
+                type: string
+    GenericResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        message:
+          type: string
+        client_request_id:
+          type: string
+    FloatBalanceResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        floats:
+          type: array
+          items:
+            $ref: '#/components/schemas/FloatBalance'
+  securitySchemes:
+    HMACAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: HMAC-SHA256 signature. Signature is built from API Key, HTTP Method, Endpoint, Client Request ID, Brand Identifier, and UTC Timestamp (ms), concatenated with hyphens and hashed with your API Secret.

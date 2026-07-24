@@ -1,0 +1,79 @@
+openapi: 3.1.0
+info:
+  title: Tillo Gift Card Balance API
+  description: The Tillo Gift Card API enables businesses to issue digital and physical gift cards from 4,000+ global brands across 37 markets and 16 currencies. Supports synchronous and asynchronous card issuance, balance checking, stock checking, refunds, order status, float management, and brand catalog access. Authentication uses HMAC-SHA256 signatures.
+  version: v2
+  contact:
+    name: Tillo Support
+    url: https://www.tillo.io/
+    email: onboarding@tillo.io
+  termsOfService: https://www.tillo.io/legal
+servers:
+- url: https://app.tillo.io/api/v2
+  description: Tillo Production API
+security:
+- HMACAuth: []
+tags:
+- name: Balance
+  description: Balance checking operations
+paths:
+  /digital/check-balance:
+    post:
+      operationId: checkBalance
+      summary: Check Gift Card Balance
+      description: Checks the remaining balance on a specific gift card. Only available for brands that support balance_check in their transaction_types.
+      tags:
+      - Balance
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CheckBalanceRequest'
+      responses:
+        '200':
+          description: Balance returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckBalanceResponse'
+components:
+  schemas:
+    CheckBalanceResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        balance:
+          type: number
+          description: Remaining balance
+        currency:
+          type: string
+        expiry_date:
+          type: string
+    CheckBalanceRequest:
+      type: object
+      required:
+      - client_request_id
+      - brand
+      - code
+      - currency
+      properties:
+        client_request_id:
+          type: string
+        brand:
+          type: string
+        code:
+          type: string
+          description: Gift card code to check
+        pin:
+          type: string
+          description: PIN if required
+        currency:
+          type: string
+  securitySchemes:
+    HMACAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: HMAC-SHA256 signature. Signature is built from API Key, HTTP Method, Endpoint, Client Request ID, Brand Identifier, and UTC Timestamp (ms), concatenated with hyphens and hashed with your API Secret.

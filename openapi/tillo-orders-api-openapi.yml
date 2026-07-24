@@ -1,0 +1,215 @@
+openapi: 3.1.0
+info:
+  title: Tillo Gift Card Balance Orders API
+  description: The Tillo Gift Card API enables businesses to issue digital and physical gift cards from 4,000+ global brands across 37 markets and 16 currencies. Supports synchronous and asynchronous card issuance, balance checking, stock checking, refunds, order status, float management, and brand catalog access. Authentication uses HMAC-SHA256 signatures.
+  version: v2
+  contact:
+    name: Tillo Support
+    url: https://www.tillo.io/
+    email: onboarding@tillo.io
+  termsOfService: https://www.tillo.io/legal
+servers:
+- url: https://app.tillo.io/api/v2
+  description: Tillo Production API
+security:
+- HMACAuth: []
+tags:
+- name: Orders
+  description: Order management and status
+paths:
+  /digital/order:
+    post:
+      operationId: orderDigitalCard
+      summary: Order Digital Gift Card (Async)
+      description: Asynchronously orders a digital gift card. Used for brands that require asynchronous processing. Returns a status and order reference.
+      tags:
+      - Orders
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IssueCardRequest'
+      responses:
+        '200':
+          description: Order accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncOrderResponse'
+  /digital/cancel:
+    post:
+      operationId: cancelOrder
+      summary: Cancel Order
+      description: Cancels a pending or errored gift card order.
+      tags:
+      - Orders
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - client_request_id
+              - brand
+              properties:
+                client_request_id:
+                  type: string
+                  description: Client-supplied request ID of the order to cancel
+                brand:
+                  type: string
+                  description: Brand identifier slug
+      responses:
+        '200':
+          description: Order cancelled
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+  /digital/refund:
+    post:
+      operationId: refundOrder
+      summary: Refund Order
+      description: Refunds a completed gift card order. Funds are returned to the float.
+      tags:
+      - Orders
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - client_request_id
+              - brand
+              - amount
+              properties:
+                client_request_id:
+                  type: string
+                brand:
+                  type: string
+                amount:
+                  type: number
+                  description: Amount to refund
+                currency:
+                  type: string
+                  description: ISO 4217 currency code
+      responses:
+        '200':
+          description: Refund processed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+  /order-status:
+    get:
+      operationId: getOrderStatus
+      summary: Get Order Status
+      description: Retrieves the status of a previously placed order using the client request ID.
+      tags:
+      - Orders
+      parameters:
+      - name: client_request_id
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Client-supplied request ID
+      - name: brand
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Brand identifier slug
+      responses:
+        '200':
+          description: Order status returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderStatusResponse'
+components:
+  schemas:
+    GenericResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        message:
+          type: string
+        client_request_id:
+          type: string
+    OrderStatusResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - pending
+          - success
+          - error
+          - cancelled
+        client_request_id:
+          type: string
+        tillo_order_id:
+          type: string
+        code:
+          type: string
+        face_value:
+          type: number
+        currency:
+          type: string
+    IssueCardRequest:
+      type: object
+      required:
+      - client_request_id
+      - brand
+      - face_value
+      - currency
+      properties:
+        client_request_id:
+          type: string
+          description: Unique client-generated request ID (idempotency key)
+        brand:
+          type: string
+          description: Brand identifier slug
+        face_value:
+          type: number
+          description: Denomination value of the gift card
+        currency:
+          type: string
+          description: ISO 4217 currency code
+        fulfilment_by:
+          type: string
+          enum:
+          - tillo
+          - client
+          description: Whether Tillo or the client fulfils delivery
+        fulfilment_parameters:
+          type: object
+          description: Delivery parameters (email, name, etc.)
+        personalisation:
+          type: object
+          description: Personalisation details for the card
+        sector:
+          type: string
+          description: Sector context for the order
+    AsyncOrderResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - pending
+          - error
+        client_request_id:
+          type: string
+        message:
+          type: string
+  securitySchemes:
+    HMACAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: HMAC-SHA256 signature. Signature is built from API Key, HTTP Method, Endpoint, Client Request ID, Brand Identifier, and UTC Timestamp (ms), concatenated with hyphens and hashed with your API Secret.
