@@ -1,0 +1,629 @@
+openapi: 3.1.0
+info:
+  title: Tillo Gift Card API
+  description: >-
+    The Tillo Gift Card API enables businesses to issue digital and physical
+    gift cards from 4,000+ global brands across 37 markets and 16 currencies.
+    Supports synchronous and asynchronous card issuance, balance checking,
+    stock checking, refunds, order status, float management, and brand catalog
+    access. Authentication uses HMAC-SHA256 signatures.
+  version: v2
+  contact:
+    name: Tillo Support
+    url: https://www.tillo.io/
+    email: onboarding@tillo.io
+  termsOfService: https://www.tillo.io/legal
+servers:
+  - url: https://app.tillo.io/api/v2
+    description: Tillo Production API
+security:
+  - HMACAuth: []
+tags:
+  - name: Brands
+    description: Brand catalog and information
+  - name: Digital Cards
+    description: Digital gift card issuance
+  - name: Physical Cards
+    description: Physical gift card operations
+  - name: Orders
+    description: Order management and status
+  - name: Balance
+    description: Balance checking operations
+  - name: Float
+    description: Float account management
+paths:
+  /brands:
+    get:
+      operationId: listBrands
+      summary: List Brands
+      description: >-
+        Retrieves the list of gift card brands available to your account,
+        including brand metadata, supported denominations, transaction types,
+        and currency information.
+      tags:
+        - Brands
+      parameters:
+        - name: country
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Filter by ISO 3166-1 alpha-2 country code (e.g., GB, US)
+        - name: currency
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Filter by ISO 4217 currency code (e.g., GBP, USD)
+        - name: async_only
+          in: query
+          required: false
+          schema:
+            type: boolean
+          description: Filter to async-only brands
+        - name: category
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Filter by brand category
+      responses:
+        '200':
+          description: Brand list returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrandListResponse'
+        '401':
+          description: Unauthorized - Invalid HMAC signature
+  /brands/{brand_identifier}:
+    get:
+      operationId: getBrand
+      summary: Get Brand
+      description: >-
+        Retrieves detailed information for a specific brand by its identifier
+        slug.
+      tags:
+        - Brands
+      parameters:
+        - name: brand_identifier
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unique brand slug/identifier
+      responses:
+        '200':
+          description: Brand details returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrandDetailResponse'
+        '404':
+          description: Brand not found
+  /digital/issue:
+    post:
+      operationId: issueDigitalCard
+      summary: Issue Digital Gift Card
+      description: >-
+        Synchronously issues a digital gift card for a specific brand and
+        denomination. Returns a gift card code or URL immediately.
+      tags:
+        - Digital Cards
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IssueCardRequest'
+      responses:
+        '200':
+          description: Gift card issued successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DigitalCardResponse'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+  /digital/order:
+    post:
+      operationId: orderDigitalCard
+      summary: Order Digital Gift Card (Async)
+      description: >-
+        Asynchronously orders a digital gift card. Used for brands that require
+        asynchronous processing. Returns a status and order reference.
+      tags:
+        - Digital Cards
+        - Orders
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IssueCardRequest'
+      responses:
+        '200':
+          description: Order accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncOrderResponse'
+  /digital/check-balance:
+    post:
+      operationId: checkBalance
+      summary: Check Gift Card Balance
+      description: >-
+        Checks the remaining balance on a specific gift card. Only available
+        for brands that support balance_check in their transaction_types.
+      tags:
+        - Balance
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CheckBalanceRequest'
+      responses:
+        '200':
+          description: Balance returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckBalanceResponse'
+  /digital/check-stock:
+    post:
+      operationId: checkStock
+      summary: Check Stock Availability
+      description: >-
+        Checks current denomination availability for fixed-denomination brands.
+      tags:
+        - Digital Cards
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - brand
+              properties:
+                brand:
+                  type: string
+                  description: Brand identifier slug
+      responses:
+        '200':
+          description: Stock availability returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StockResponse'
+  /digital/cancel:
+    post:
+      operationId: cancelOrder
+      summary: Cancel Order
+      description: >-
+        Cancels a pending or errored gift card order.
+      tags:
+        - Orders
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - client_request_id
+                - brand
+              properties:
+                client_request_id:
+                  type: string
+                  description: Client-supplied request ID of the order to cancel
+                brand:
+                  type: string
+                  description: Brand identifier slug
+      responses:
+        '200':
+          description: Order cancelled
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+  /digital/refund:
+    post:
+      operationId: refundOrder
+      summary: Refund Order
+      description: >-
+        Refunds a completed gift card order. Funds are returned to the float.
+      tags:
+        - Orders
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - client_request_id
+                - brand
+                - amount
+              properties:
+                client_request_id:
+                  type: string
+                brand:
+                  type: string
+                amount:
+                  type: number
+                  description: Amount to refund
+                currency:
+                  type: string
+                  description: ISO 4217 currency code
+      responses:
+        '200':
+          description: Refund processed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+  /order-status:
+    get:
+      operationId: getOrderStatus
+      summary: Get Order Status
+      description: >-
+        Retrieves the status of a previously placed order using the client
+        request ID.
+      tags:
+        - Orders
+      parameters:
+        - name: client_request_id
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Client-supplied request ID
+        - name: brand
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Brand identifier slug
+      responses:
+        '200':
+          description: Order status returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderStatusResponse'
+  /float:
+    get:
+      operationId: getFloatBalance
+      summary: Get Float Balance
+      description: >-
+        Retrieves real-time balance of float accounts and pending payment
+        transfers.
+      tags:
+        - Float
+      responses:
+        '200':
+          description: Float balance returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FloatBalanceResponse'
+  /float/request-payment-transfer:
+    post:
+      operationId: requestPaymentTransfer
+      summary: Request Payment Transfer
+      description: >-
+        Requests a payment transfer to top up a float account.
+      tags:
+        - Float
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentTransferRequest'
+      responses:
+        '200':
+          description: Transfer request submitted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+  /float/transfer-requests:
+    get:
+      operationId: listTransferRequests
+      summary: List Transfer Requests
+      description: >-
+        Lists pending and completed float payment transfer requests.
+      tags:
+        - Float
+      responses:
+        '200':
+          description: Transfer requests returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransferRequestsResponse'
+components:
+  securitySchemes:
+    HMACAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: >-
+        HMAC-SHA256 signature. Signature is built from API Key, HTTP Method,
+        Endpoint, Client Request ID, Brand Identifier, and UTC Timestamp (ms),
+        concatenated with hyphens and hashed with your API Secret.
+  schemas:
+    Brand:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Brand display name
+        identifier:
+          type: string
+          description: Unique brand slug
+        country:
+          type: string
+          description: ISO 3166-1 alpha-2 country code
+        currency:
+          type: string
+          description: ISO 4217 currency code
+        min_value:
+          type: number
+          description: Minimum denomination
+        max_value:
+          type: number
+          description: Maximum denomination
+        face_value:
+          type: array
+          items:
+            type: number
+          description: Fixed denominations (for fixed-value brands)
+        async_only:
+          type: boolean
+          description: Whether this brand requires asynchronous ordering
+        transaction_types:
+          type: array
+          items:
+            type: string
+            enum:
+              - issue
+              - balance_check
+              - top_up
+              - refund
+          description: Supported transaction types
+        category:
+          type: string
+          description: Brand category
+        logo_url:
+          type: string
+          description: URL of brand logo
+        terms_and_conditions_copy:
+          type: string
+          description: Brand T&C text
+    BrandListResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        brands:
+          type: array
+          items:
+            $ref: '#/components/schemas/Brand'
+    BrandDetailResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        brand:
+          $ref: '#/components/schemas/Brand'
+    IssueCardRequest:
+      type: object
+      required:
+        - client_request_id
+        - brand
+        - face_value
+        - currency
+      properties:
+        client_request_id:
+          type: string
+          description: Unique client-generated request ID (idempotency key)
+        brand:
+          type: string
+          description: Brand identifier slug
+        face_value:
+          type: number
+          description: Denomination value of the gift card
+        currency:
+          type: string
+          description: ISO 4217 currency code
+        fulfilment_by:
+          type: string
+          enum:
+            - tillo
+            - client
+          description: Whether Tillo or the client fulfils delivery
+        fulfilment_parameters:
+          type: object
+          description: Delivery parameters (email, name, etc.)
+        personalisation:
+          type: object
+          description: Personalisation details for the card
+        sector:
+          type: string
+          description: Sector context for the order
+    DigitalCardResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+            - success
+            - error
+        code:
+          type: string
+          description: Gift card redemption code
+        barcode:
+          type: string
+          description: Barcode value if applicable
+        pin:
+          type: string
+          description: PIN if applicable
+        redemption_url:
+          type: string
+          description: URL for digital redemption
+        expiry_date:
+          type: string
+          description: Card expiry date
+        face_value:
+          type: number
+        currency:
+          type: string
+        client_request_id:
+          type: string
+        tillo_order_id:
+          type: string
+    AsyncOrderResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+            - pending
+            - error
+        client_request_id:
+          type: string
+        message:
+          type: string
+    CheckBalanceRequest:
+      type: object
+      required:
+        - client_request_id
+        - brand
+        - code
+        - currency
+      properties:
+        client_request_id:
+          type: string
+        brand:
+          type: string
+        code:
+          type: string
+          description: Gift card code to check
+        pin:
+          type: string
+          description: PIN if required
+        currency:
+          type: string
+    CheckBalanceResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        balance:
+          type: number
+          description: Remaining balance
+        currency:
+          type: string
+        expiry_date:
+          type: string
+    StockResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        denominations:
+          type: array
+          items:
+            type: object
+            properties:
+              value:
+                type: number
+              available:
+                type: boolean
+              stock_count:
+                type: integer
+    OrderStatusResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+            - pending
+            - success
+            - error
+            - cancelled
+        client_request_id:
+          type: string
+        tillo_order_id:
+          type: string
+        code:
+          type: string
+        face_value:
+          type: number
+        currency:
+          type: string
+    FloatBalance:
+      type: object
+      properties:
+        currency:
+          type: string
+        balance:
+          type: number
+        pending_transfers:
+          type: number
+    FloatBalanceResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        floats:
+          type: array
+          items:
+            $ref: '#/components/schemas/FloatBalance'
+    PaymentTransferRequest:
+      type: object
+      required:
+        - amount
+        - currency
+      properties:
+        amount:
+          type: number
+          description: Amount to transfer
+        currency:
+          type: string
+          description: ISO 4217 currency code
+    TransferRequestsResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        transfer_requests:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              amount:
+                type: number
+              currency:
+                type: string
+              status:
+                type: string
+              created_at:
+                type: string
+    GenericResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        message:
+          type: string
+        client_request_id:
+          type: string

@@ -1,0 +1,22 @@
+{
+  "provider": "tillo",
+  "sources": [
+    "tillo-balance-api-openapi.yml",
+    "tillo-brands-api-openapi.yml",
+    "tillo-digital-cards-api-openapi.yml",
+    "tillo-float-api-openapi.yml",
+    "tillo-orders-api-openapi.yml"
+  ],
+  "outputs": [
+    "tillo-balance-api-openapi.yml",
+    "tillo-brands-api-openapi.yml",
+    "tillo-digital-cards-api-openapi.yml",
+    "tillo-float-api-openapi.yml",
+    "tillo-orders-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
