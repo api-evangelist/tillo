@@ -1,0 +1,82 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tillo Gift Card Balance Brands API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Brands",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Brands",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.tillo.io/api/v2/brands",
+            "params": [
+              {
+                "name": "country",
+                "value": "",
+                "type": "query",
+                "description": "Filter by ISO 3166-1 alpha-2 country code (e.g., GB, US)"
+              },
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "Filter by ISO 4217 currency code (e.g., GBP, USD)"
+              },
+              {
+                "name": "async_only",
+                "value": "",
+                "type": "query",
+                "description": "Filter to async-only brands"
+              },
+              {
+                "name": "category",
+                "value": "",
+                "type": "query",
+                "description": "Filter by brand category"
+              }
+            ]
+          },
+          "docs": "Retrieves the list of gift card brands available to your account, including brand metadata, supported denominations, transaction types, and currency information."
+        },
+        {
+          "info": {
+            "name": "Get Brand",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.tillo.io/api/v2/brands/:brand_identifier",
+            "params": [
+              {
+                "name": "brand_identifier",
+                "value": "",
+                "type": "path",
+                "description": "Unique brand slug/identifier"
+              }
+            ]
+          },
+          "docs": "Retrieves detailed information for a specific brand by its identifier slug."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

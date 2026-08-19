@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tillo Gift Card Balance API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Balance",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Check Gift Card Balance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.tillo.io/api/v2/digital/check-balance",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Checks the remaining balance on a specific gift card. Only available for brands that support balance_check in their transaction_types."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,63 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tillo Gift Card Balance Float API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Float",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Float Balance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.tillo.io/api/v2/float"
+          },
+          "docs": "Retrieves real-time balance of float accounts and pending payment transfers."
+        },
+        {
+          "info": {
+            "name": "Request Payment Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.tillo.io/api/v2/float/request-payment-transfer",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Requests a payment transfer to top up a float account."
+        },
+        {
+          "info": {
+            "name": "List Transfer Requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.tillo.io/api/v2/float/transfer-requests"
+          },
+          "docs": "Lists pending and completed float payment transfer requests."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

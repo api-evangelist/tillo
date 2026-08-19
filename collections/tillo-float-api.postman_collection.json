@@ -1,0 +1,308 @@
+{
+  "item": [
+    {
+      "id": "1d35097b-7aef-4826-a963-3ad06c9c41af",
+      "name": "Float",
+      "description": {
+        "content": "Float account management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "af15d6f4-d56f-4b5e-b276-15461c2749e1",
+          "name": "Get Float Balance",
+          "request": {
+            "name": "Get Float Balance",
+            "description": {
+              "content": "Retrieves real-time balance of float accounts and pending payment transfers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "float"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "813e146e-67ab-4f91-aa8c-77d53823c9c4",
+              "name": "Float balance returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "float"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"floats\": [\n    {\n      \"currency\": \"string\",\n      \"balance\": 9574.75362317976,\n      \"pending_transfers\": 7006.2335976227605\n    },\n    {\n      \"currency\": \"string\",\n      \"balance\": 5423.829917016707,\n      \"pending_transfers\": 5060.676748640351\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "49276fec-2818-4007-a26e-943049a4feda",
+          "name": "Request Payment Transfer",
+          "request": {
+            "name": "Request Payment Transfer",
+            "description": {
+              "content": "Requests a payment transfer to top up a float account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "float",
+                "request-payment-transfer"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": \"<number>\",\n  \"currency\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f6ff5bb0-05ed-43cd-9122-ebf20a50596c",
+              "name": "Transfer request submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "float",
+                    "request-payment-transfer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<number>\",\n  \"currency\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"message\": \"string\",\n  \"client_request_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eec0e553-e430-4e11-9a60-9afaa285a635",
+          "name": "List Transfer Requests",
+          "request": {
+            "name": "List Transfer Requests",
+            "description": {
+              "content": "Lists pending and completed float payment transfer requests.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "float",
+                "transfer-requests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "535cfac5-ab15-4102-a553-b1e50dbef6a7",
+              "name": "Transfer requests returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "float",
+                    "transfer-requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"transfer_requests\": [\n    {\n      \"id\": \"string\",\n      \"amount\": 1464.1469496390537,\n      \"currency\": \"string\",\n      \"status\": \"string\",\n      \"created_at\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"amount\": 8225.10183029805,\n      \"currency\": \"string\",\n      \"status\": \"string\",\n      \"created_at\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.tillo.io/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8590315d-a53f-48a8-b151-bb0fe878b5fd",
+    "name": "Tillo Gift Card Balance Float API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Tillo Gift Card API enables businesses to issue digital and physical gift cards from 4,000+ global brands across 37 markets and 16 currencies. Supports synchronous and asynchronous card issuance, balance checking, stock checking, refunds, order status, float management, and brand catalog access. Authentication uses HMAC-SHA256 signatures.\n\nContact Support:\n Name: Tillo Support\n Email: onboarding@tillo.io",
+      "type": "text/plain"
+    }
+  }
+}

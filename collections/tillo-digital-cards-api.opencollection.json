@@ -1,0 +1,71 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tillo Gift Card Balance Digital Cards API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Digital Cards",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Issue Digital Gift Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.tillo.io/api/v2/digital/issue",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Synchronously issues a digital gift card for a specific brand and denomination. Returns a gift card code or URL immediately."
+        },
+        {
+          "info": {
+            "name": "Order Digital Gift Card (Async)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.tillo.io/api/v2/digital/order",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Asynchronously orders a digital gift card. Used for brands that require asynchronous processing. Returns a status and order reference."
+        },
+        {
+          "info": {
+            "name": "Check Stock Availability",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.tillo.io/api/v2/digital/check-stock",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Checks current denomination availability for fixed-denomination brands."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

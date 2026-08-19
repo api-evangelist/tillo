@@ -1,0 +1,369 @@
+{
+  "item": [
+    {
+      "id": "4a7071b8-74af-4dc9-a378-a70bcb6461f0",
+      "name": "Brands",
+      "description": {
+        "content": "Brand catalog and information",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cb81afe0-3a5f-493e-8f61-4ae4df1c65d1",
+          "name": "List Brands",
+          "request": {
+            "name": "List Brands",
+            "description": {
+              "content": "Retrieves the list of gift card brands available to your account, including brand metadata, supported denominations, transaction types, and currency information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "brands"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "country",
+                  "value": "<string>",
+                  "description": "Filter by ISO 3166-1 alpha-2 country code (e.g., GB, US)"
+                },
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "Filter by ISO 4217 currency code (e.g., GBP, USD)"
+                },
+                {
+                  "disabled": false,
+                  "key": "async_only",
+                  "value": "<boolean>",
+                  "description": "Filter to async-only brands"
+                },
+                {
+                  "disabled": false,
+                  "key": "category",
+                  "value": "<string>",
+                  "description": "Filter by brand category"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a13ff99a-5feb-40a8-ad6a-f9a18a000ab9",
+              "name": "Brand list returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "brands"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "country",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "async_only",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "category",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"brands\": [\n    {\n      \"name\": \"string\",\n      \"identifier\": \"string\",\n      \"country\": \"string\",\n      \"currency\": \"string\",\n      \"min_value\": 8349.147549375935,\n      \"max_value\": 5966.385555624953,\n      \"face_value\": [\n        2546.909325129594,\n        5368.493052442057\n      ],\n      \"async_only\": false,\n      \"transaction_types\": [\n        \"refund\",\n        \"balance_check\"\n      ],\n      \"category\": \"string\",\n      \"logo_url\": \"string\",\n      \"terms_and_conditions_copy\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"identifier\": \"string\",\n      \"country\": \"string\",\n      \"currency\": \"string\",\n      \"min_value\": 9630.888030167143,\n      \"max_value\": 9007.209592506613,\n      \"face_value\": [\n        1910.7786583669795,\n        2080.0097161228614\n      ],\n      \"async_only\": false,\n      \"transaction_types\": [\n        \"balance_check\",\n        \"balance_check\"\n      ],\n      \"category\": \"string\",\n      \"logo_url\": \"string\",\n      \"terms_and_conditions_copy\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eaf1f101-e88f-4062-98c8-a6f75bf9abee",
+              "name": "Unauthorized - Invalid HMAC signature",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "brands"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "country",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "async_only",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "category",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "31ac3cdc-33a2-4c6c-8c92-5d2b59b758d5",
+          "name": "Get Brand",
+          "request": {
+            "name": "Get Brand",
+            "description": {
+              "content": "Retrieves detailed information for a specific brand by its identifier slug.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "brands",
+                ":brand_identifier"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "brand_identifier",
+                  "description": "(Required) Unique brand slug/identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8bd2100d-b246-4847-83ea-aeadea7dfde0",
+              "name": "Brand details returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "brands",
+                    ":brand_identifier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "brand_identifier",
+                      "description": "(Required) Unique brand slug/identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"brand\": {\n    \"name\": \"string\",\n    \"identifier\": \"string\",\n    \"country\": \"string\",\n    \"currency\": \"string\",\n    \"min_value\": 2883.26786937117,\n    \"max_value\": 9615.69797287692,\n    \"face_value\": [\n      5936.816583163623,\n      7077.3860978876955\n    ],\n    \"async_only\": true,\n    \"transaction_types\": [\n      \"issue\",\n      \"refund\"\n    ],\n    \"category\": \"string\",\n    \"logo_url\": \"string\",\n    \"terms_and_conditions_copy\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "03e48c03-92f7-438a-9f06-d908cbe0476a",
+              "name": "Brand not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "brands",
+                    ":brand_identifier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "brand_identifier",
+                      "description": "(Required) Unique brand slug/identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.tillo.io/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "29b0ada1-536d-4848-a8fd-c2cc1285dbaf",
+    "name": "Tillo Gift Card Balance Brands API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Tillo Gift Card API enables businesses to issue digital and physical gift cards from 4,000+ global brands across 37 markets and 16 currencies. Supports synchronous and asynchronous card issuance, balance checking, stock checking, refunds, order status, float management, and brand catalog access. Authentication uses HMAC-SHA256 signatures.\n\nContact Support:\n Name: Tillo Support\n Email: onboarding@tillo.io",
+      "type": "text/plain"
+    }
+  }
+}

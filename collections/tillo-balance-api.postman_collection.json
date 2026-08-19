@@ -1,0 +1,150 @@
+{
+  "item": [
+    {
+      "id": "e013cb67-43ef-43cb-9123-e10f64514bff",
+      "name": "Balance",
+      "description": {
+        "content": "Balance checking operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d7689877-266e-4fa7-9ae7-65c8d08f08f9",
+          "name": "Check Gift Card Balance",
+          "request": {
+            "name": "Check Gift Card Balance",
+            "description": {
+              "content": "Checks the remaining balance on a specific gift card. Only available for brands that support balance_check in their transaction_types.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "digital",
+                "check-balance"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"client_request_id\": \"<string>\",\n  \"brand\": \"<string>\",\n  \"code\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"pin\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "618dd212-e4a0-425a-817d-63eeba25d49c",
+              "name": "Balance returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "digital",
+                    "check-balance"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"client_request_id\": \"<string>\",\n  \"brand\": \"<string>\",\n  \"code\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"pin\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"balance\": 8941.485353067215,\n  \"currency\": \"string\",\n  \"expiry_date\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.tillo.io/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "79f9bfc7-5e99-4171-ab92-8ce0842cf148",
+    "name": "Tillo Gift Card Balance API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Tillo Gift Card API enables businesses to issue digital and physical gift cards from 4,000+ global brands across 37 markets and 16 currencies. Supports synchronous and asynchronous card issuance, balance checking, stock checking, refunds, order status, float management, and brand catalog access. Authentication uses HMAC-SHA256 signatures.\n\nContact Support:\n Name: Tillo Support\n Email: onboarding@tillo.io",
+      "type": "text/plain"
+    }
+  }
+}
