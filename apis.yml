@@ -38,6 +38,8 @@ apis:
   humanURL: https://www.tillo.io/gift-card-api
   baseURL: https://app.tillo.io
   tags:
+  - Balances
+  tags_raw:
   - Balance
   properties:
   - type: OpenAPI
@@ -94,6 +96,8 @@ apis:
   humanURL: https://www.tillo.io/gift-card-api
   baseURL: https://app.tillo.io
   tags:
+  - Order
+  tags_raw:
   - Orders
   properties:
   - type: OpenAPI
