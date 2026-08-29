@@ -5,6 +5,19 @@ description: >-
   16 currencies. The REST API supports digital and physical gift card issuance, balance checking, float management, and
   brand catalog access. Authentication uses HMAC-SHA256 signatures.
 type: Index
+deliveryModel:
+  model: unknown
+  open_source: unknown
+  commercial: true
+  callable_host: true
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - openapi
+  - pricing
+  - repository-unlicensed
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
@@ -107,6 +120,8 @@ apis:
   - type: Documentation
     url: https://tillo.tech/v2_docs/floats.html
 common:
+  - type: IssueTracker
+    url: https://github.com/tilloops/tillo/issues
   - type: AgenticAccess
     url: agentic-access/tillo-agentic-access.yml
   - type: DomainSecurity
