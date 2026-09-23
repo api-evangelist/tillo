@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Tillo Gift Card Balance Digital Cards API
+  title: Tillo Gift Card Digital Cards API
   description: The Tillo Gift Card API enables businesses to issue digital and physical gift cards from 4,000+ global brands across 37 markets and 16 currencies. Supports synchronous and asynchronous card issuance, balance checking, stock checking, refunds, order status, float management, and brand catalog access. Authentication uses HMAC-SHA256 signatures.
   version: v2
   contact:
@@ -105,37 +105,6 @@ components:
                 type: boolean
               stock_count:
                 type: integer
-    DigitalCardResponse:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - success
-          - error
-        code:
-          type: string
-          description: Gift card redemption code
-        barcode:
-          type: string
-          description: Barcode value if applicable
-        pin:
-          type: string
-          description: PIN if applicable
-        redemption_url:
-          type: string
-          description: URL for digital redemption
-        expiry_date:
-          type: string
-          description: Card expiry date
-        face_value:
-          type: number
-        currency:
-          type: string
-        client_request_id:
-          type: string
-        tillo_order_id:
-          type: string
     IssueCardRequest:
       type: object
       required:
@@ -171,6 +140,37 @@ components:
         sector:
           type: string
           description: Sector context for the order
+    DigitalCardResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - success
+          - error
+        code:
+          type: string
+          description: Gift card redemption code
+        barcode:
+          type: string
+          description: Barcode value if applicable
+        pin:
+          type: string
+          description: PIN if applicable
+        redemption_url:
+          type: string
+          description: URL for digital redemption
+        expiry_date:
+          type: string
+          description: Card expiry date
+        face_value:
+          type: number
+        currency:
+          type: string
+        client_request_id:
+          type: string
+        tillo_order_id:
+          type: string
     AsyncOrderResponse:
       type: object
       properties:

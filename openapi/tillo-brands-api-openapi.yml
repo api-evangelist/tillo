@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Tillo Gift Card Balance Brands API
+  title: Tillo Gift Card Brands API
   description: The Tillo Gift Card API enables businesses to issue digital and physical gift cards from 4,000+ global brands across 37 markets and 16 currencies. Supports synchronous and asynchronous card issuance, balance checking, stock checking, refunds, order status, float management, and brand catalog access. Authentication uses HMAC-SHA256 signatures.
   version: v2
   contact:
@@ -83,22 +83,6 @@ paths:
           description: Brand not found
 components:
   schemas:
-    BrandListResponse:
-      type: object
-      properties:
-        status:
-          type: string
-        brands:
-          type: array
-          items:
-            $ref: '#/components/schemas/Brand'
-    BrandDetailResponse:
-      type: object
-      properties:
-        status:
-          type: string
-        brand:
-          $ref: '#/components/schemas/Brand'
     Brand:
       type: object
       properties:
@@ -147,6 +131,22 @@ components:
         terms_and_conditions_copy:
           type: string
           description: Brand T&C text
+    BrandDetailResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        brand:
+          $ref: '#/components/schemas/Brand'
+    BrandListResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        brands:
+          type: array
+          items:
+            $ref: '#/components/schemas/Brand'
   securitySchemes:
     HMACAuth:
       type: apiKey

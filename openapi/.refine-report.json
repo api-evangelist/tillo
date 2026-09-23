@@ -1,11 +1,7 @@
 {
   "provider": "tillo",
   "sources": [
-    "tillo-balance-api-openapi.yml",
-    "tillo-brands-api-openapi.yml",
-    "tillo-digital-cards-api-openapi.yml",
-    "tillo-float-api-openapi.yml",
-    "tillo-orders-api-openapi.yml"
+    "_original/tillo-gift-card-openapi.yml"
   ],
   "outputs": [
     "tillo-balance-api-openapi.yml",
@@ -17,6 +13,16 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "tillo-gift-card-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "tillo-balance-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tillo-brands-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tillo-digital-cards-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tillo-float-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tillo-orders-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
