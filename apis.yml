@@ -7,6 +7,10 @@ description: >-
 type: Index
 deliveryModel:
   model: unknown
+  license_evidence:
+    repo: tilloops/tillo
+    spdx: none
+    stars: 2
   open_source: unknown
   commercial: true
   callable_host: true
@@ -16,7 +20,7 @@ deliveryModel:
   - openapi
   - pricing
   - repository-unlicensed
-  generated: '2026-08-28'
+  generated: '2026-09-25'
   method: derived
 accessModel:
   pricing: freemium
@@ -41,6 +45,7 @@ tags:
   - Payments
   - Rewards
   - Incentives
+  - Loyalty & Incentives
 created: '2025-02-08'
 modified: '2026-05-19'
 url: https://raw.githubusercontent.com/api-evangelist/tillo/refs/heads/main/apis.yml

@@ -83,6 +83,13 @@ paths:
           description: Brand not found
 components:
   schemas:
+    BrandDetailResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        brand:
+          $ref: '#/components/schemas/Brand'
     Brand:
       type: object
       properties:
@@ -131,13 +138,6 @@ components:
         terms_and_conditions_copy:
           type: string
           description: Brand T&C text
-    BrandDetailResponse:
-      type: object
-      properties:
-        status:
-          type: string
-        brand:
-          $ref: '#/components/schemas/Brand'
     BrandListResponse:
       type: object
       properties:
