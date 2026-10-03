@@ -105,37 +105,6 @@ components:
                 type: boolean
               stock_count:
                 type: integer
-    DigitalCardResponse:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - success
-          - error
-        code:
-          type: string
-          description: Gift card redemption code
-        barcode:
-          type: string
-          description: Barcode value if applicable
-        pin:
-          type: string
-          description: PIN if applicable
-        redemption_url:
-          type: string
-          description: URL for digital redemption
-        expiry_date:
-          type: string
-          description: Card expiry date
-        face_value:
-          type: number
-        currency:
-          type: string
-        client_request_id:
-          type: string
-        tillo_order_id:
-          type: string
     IssueCardRequest:
       type: object
       required:
@@ -182,6 +151,37 @@ components:
         client_request_id:
           type: string
         message:
+          type: string
+    DigitalCardResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - success
+          - error
+        code:
+          type: string
+          description: Gift card redemption code
+        barcode:
+          type: string
+          description: Barcode value if applicable
+        pin:
+          type: string
+          description: PIN if applicable
+        redemption_url:
+          type: string
+          description: URL for digital redemption
+        expiry_date:
+          type: string
+          description: Card expiry date
+        face_value:
+          type: number
+        currency:
+          type: string
+        client_request_id:
+          type: string
+        tillo_order_id:
           type: string
   securitySchemes:
     HMACAuth:

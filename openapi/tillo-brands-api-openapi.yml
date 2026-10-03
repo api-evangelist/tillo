@@ -83,13 +83,15 @@ paths:
           description: Brand not found
 components:
   schemas:
-    BrandDetailResponse:
+    BrandListResponse:
       type: object
       properties:
         status:
           type: string
-        brand:
-          $ref: '#/components/schemas/Brand'
+        brands:
+          type: array
+          items:
+            $ref: '#/components/schemas/Brand'
     Brand:
       type: object
       properties:
@@ -138,15 +140,13 @@ components:
         terms_and_conditions_copy:
           type: string
           description: Brand T&C text
-    BrandListResponse:
+    BrandDetailResponse:
       type: object
       properties:
         status:
           type: string
-        brands:
-          type: array
-          items:
-            $ref: '#/components/schemas/Brand'
+        brand:
+          $ref: '#/components/schemas/Brand'
   securitySchemes:
     HMACAuth:
       type: apiKey

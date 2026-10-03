@@ -131,34 +131,17 @@ paths:
                 $ref: '#/components/schemas/OrderStatusResponse'
 components:
   schemas:
-    GenericResponse:
-      type: object
-      properties:
-        status:
-          type: string
-        message:
-          type: string
-        client_request_id:
-          type: string
-    OrderStatusResponse:
+    AsyncOrderResponse:
       type: object
       properties:
         status:
           type: string
           enum:
           - pending
-          - success
           - error
-          - cancelled
         client_request_id:
           type: string
-        tillo_order_id:
-          type: string
-        code:
-          type: string
-        face_value:
-          type: number
-        currency:
+        message:
           type: string
     IssueCardRequest:
       type: object
@@ -195,17 +178,34 @@ components:
         sector:
           type: string
           description: Sector context for the order
-    AsyncOrderResponse:
+    OrderStatusResponse:
       type: object
       properties:
         status:
           type: string
           enum:
           - pending
+          - success
           - error
+          - cancelled
         client_request_id:
           type: string
+        tillo_order_id:
+          type: string
+        code:
+          type: string
+        face_value:
+          type: number
+        currency:
+          type: string
+    GenericResponse:
+      type: object
+      properties:
+        status:
+          type: string
         message:
+          type: string
+        client_request_id:
           type: string
   securitySchemes:
     HMACAuth:

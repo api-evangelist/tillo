@@ -39,6 +39,18 @@ paths:
                 $ref: '#/components/schemas/CheckBalanceResponse'
 components:
   schemas:
+    CheckBalanceResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        balance:
+          type: number
+          description: Remaining balance
+        currency:
+          type: string
+        expiry_date:
+          type: string
     CheckBalanceRequest:
       type: object
       required:
@@ -58,18 +70,6 @@ components:
           type: string
           description: PIN if required
         currency:
-          type: string
-    CheckBalanceResponse:
-      type: object
-      properties:
-        status:
-          type: string
-        balance:
-          type: number
-          description: Remaining balance
-        currency:
-          type: string
-        expiry_date:
           type: string
   securitySchemes:
     HMACAuth:
