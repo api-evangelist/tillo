@@ -89,22 +89,18 @@ paths:
                 $ref: '#/components/schemas/StockResponse'
 components:
   schemas:
-    StockResponse:
+    AsyncOrderResponse:
       type: object
       properties:
         status:
           type: string
-        denominations:
-          type: array
-          items:
-            type: object
-            properties:
-              value:
-                type: number
-              available:
-                type: boolean
-              stock_count:
-                type: integer
+          enum:
+          - pending
+          - error
+        client_request_id:
+          type: string
+        message:
+          type: string
     IssueCardRequest:
       type: object
       required:
@@ -140,18 +136,22 @@ components:
         sector:
           type: string
           description: Sector context for the order
-    AsyncOrderResponse:
+    StockResponse:
       type: object
       properties:
         status:
           type: string
-          enum:
-          - pending
-          - error
-        client_request_id:
-          type: string
-        message:
-          type: string
+        denominations:
+          type: array
+          items:
+            type: object
+            properties:
+              value:
+                type: number
+              available:
+                type: boolean
+              stock_count:
+                type: integer
     DigitalCardResponse:
       type: object
       properties:

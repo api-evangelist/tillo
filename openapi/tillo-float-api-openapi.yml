@@ -67,6 +67,18 @@ paths:
                 $ref: '#/components/schemas/TransferRequestsResponse'
 components:
   schemas:
+    PaymentTransferRequest:
+      type: object
+      required:
+      - amount
+      - currency
+      properties:
+        amount:
+          type: number
+          description: Amount to transfer
+        currency:
+          type: string
+          description: ISO 4217 currency code
     FloatBalanceResponse:
       type: object
       properties:
@@ -96,27 +108,6 @@ components:
                 type: string
               created_at:
                 type: string
-    PaymentTransferRequest:
-      type: object
-      required:
-      - amount
-      - currency
-      properties:
-        amount:
-          type: number
-          description: Amount to transfer
-        currency:
-          type: string
-          description: ISO 4217 currency code
-    FloatBalance:
-      type: object
-      properties:
-        currency:
-          type: string
-        balance:
-          type: number
-        pending_transfers:
-          type: number
     GenericResponse:
       type: object
       properties:
@@ -126,6 +117,15 @@ components:
           type: string
         client_request_id:
           type: string
+    FloatBalance:
+      type: object
+      properties:
+        currency:
+          type: string
+        balance:
+          type: number
+        pending_transfers:
+          type: number
   securitySchemes:
     HMACAuth:
       type: apiKey
