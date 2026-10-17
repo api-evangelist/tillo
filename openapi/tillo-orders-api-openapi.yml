@@ -131,18 +131,6 @@ paths:
                 $ref: '#/components/schemas/OrderStatusResponse'
 components:
   schemas:
-    AsyncOrderResponse:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - pending
-          - error
-        client_request_id:
-          type: string
-        message:
-          type: string
     IssueCardRequest:
       type: object
       required:
@@ -178,6 +166,15 @@ components:
         sector:
           type: string
           description: Sector context for the order
+    GenericResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        message:
+          type: string
+        client_request_id:
+          type: string
     OrderStatusResponse:
       type: object
       properties:
@@ -198,14 +195,17 @@ components:
           type: number
         currency:
           type: string
-    GenericResponse:
+    AsyncOrderResponse:
       type: object
       properties:
         status:
           type: string
-        message:
-          type: string
+          enum:
+          - pending
+          - error
         client_request_id:
+          type: string
+        message:
           type: string
   securitySchemes:
     HMACAuth:

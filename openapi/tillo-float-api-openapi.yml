@@ -67,27 +67,6 @@ paths:
                 $ref: '#/components/schemas/TransferRequestsResponse'
 components:
   schemas:
-    PaymentTransferRequest:
-      type: object
-      required:
-      - amount
-      - currency
-      properties:
-        amount:
-          type: number
-          description: Amount to transfer
-        currency:
-          type: string
-          description: ISO 4217 currency code
-    FloatBalanceResponse:
-      type: object
-      properties:
-        status:
-          type: string
-        floats:
-          type: array
-          items:
-            $ref: '#/components/schemas/FloatBalance'
     TransferRequestsResponse:
       type: object
       properties:
@@ -117,6 +96,27 @@ components:
           type: string
         client_request_id:
           type: string
+    PaymentTransferRequest:
+      type: object
+      required:
+      - amount
+      - currency
+      properties:
+        amount:
+          type: number
+          description: Amount to transfer
+        currency:
+          type: string
+          description: ISO 4217 currency code
+    FloatBalanceResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        floats:
+          type: array
+          items:
+            $ref: '#/components/schemas/FloatBalance'
     FloatBalance:
       type: object
       properties:
