@@ -126,6 +126,8 @@ apis:
   - type: Documentation
     url: https://tillo.tech/v2_docs/floats.html
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/tillo/overview
   - type: Plans
     url: plans/tillo-plans-pricing.yml
   - type: RateLimits
