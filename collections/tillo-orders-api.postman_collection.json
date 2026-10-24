@@ -1,426 +1,465 @@
 {
+  "info": {
+    "_postman_id": "8815f172-1b31-49a1-b7cf-bf8baa167c61",
+    "name": "Tillo Gift Card Orders API",
+    "description": "The Tillo Gift Card API enables businesses to issue digital and physical gift cards from 4,000+ global brands across 37 markets and 16 currencies. Supports synchronous and asynchronous card issuance, balance checking, stock checking, refunds, order status, float management, and brand catalog access. Authentication uses HMAC-SHA256 signatures.\n\nContact Support:\n Name: Tillo Support\n Email: onboarding@tillo.io",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T21:07:28.000Z",
+    "updatedAt": "2026-10-21T21:07:28.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-8815f172-1b31-49a1-b7cf-bf8baa167c61"
+  },
   "item": [
     {
-      "id": "7e7e29d5-0150-47e9-85ac-701f10dff900",
-      "name": "Orders",
-      "description": {
-        "content": "Order management and status",
-        "type": "text/plain"
-      },
+      "name": "digital",
       "item": [
         {
-          "id": "bf8d4b47-bb7b-4c37-8f4d-5906d5bae69e",
-          "name": "Order Digital Gift Card (Async)",
-          "request": {
-            "name": "Order Digital Gift Card (Async)",
-            "description": {
-              "content": "Asynchronously orders a digital gift card. Used for brands that require asynchronous processing. Returns a status and order reference.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "digital",
-                "order"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"client_request_id\": \"<string>\",\n  \"brand\": \"<string>\",\n  \"face_value\": \"<number>\",\n  \"currency\": \"<string>\",\n  \"fulfilment_by\": \"<string>\",\n  \"fulfilment_parameters\": \"<object>\",\n  \"personalisation\": \"<object>\",\n  \"sector\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
+          "name": "order",
+          "item": [
             {
-              "id": "8804b227-09bc-48e1-bf2b-7db4a7fb11e4",
-              "name": "Order accepted",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "digital",
-                    "order"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+              "name": "Order Digital Gift Card (Async)",
+              "id": "d2fc5011-1128-43eb-a178-e74de15183af",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"client_request_id\": \"<string>\",\n  \"brand\": \"<string>\",\n  \"face_value\": \"<number>\",\n  \"currency\": \"<string>\",\n  \"fulfilment_by\": \"<string>\",\n  \"fulfilment_parameters\": \"<object>\",\n  \"personalisation\": \"<object>\",\n  \"sector\": \"<string>\"\n}",
+                  "raw": "{\n  \"client_request_id\": \"<string>\",\n  \"brand\": \"<string>\",\n  \"face_value\": \"<number>\",\n  \"currency\": \"<string>\",\n  \"fulfilment_by\": \"tillo\",\n  \"fulfilment_parameters\": {},\n  \"personalisation\": {},\n  \"sector\": \"<string>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"status\": \"pending\",\n  \"client_request_id\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "4f134369-dc81-4f13-9b94-d4fc165d859b",
-          "name": "Cancel Order",
-          "request": {
-            "name": "Cancel Order",
-            "description": {
-              "content": "Cancels a pending or errored gift card order.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "digital",
-                "cancel"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"client_request_id\": \"<string>\",\n  \"brand\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "8cdb8288-64d1-4c7f-a069-d1b17de72272",
-              "name": "Order cancelled",
-              "originalRequest": {
+                },
                 "url": {
-                  "path": [
-                    "digital",
-                    "cancel"
-                  ],
+                  "raw": "{{baseUrl}}/digital/order",
                   "host": [
                     "{{baseUrl}}"
                   ],
-                  "query": [],
-                  "variable": []
+                  "path": [
+                    "digital",
+                    "order"
+                  ]
                 },
+                "description": "Asynchronously orders a digital gift card. Used for brands that require asynchronous processing. Returns a status and order reference."
+              },
+              "response": [
+                {
+                  "id": "39bc1788-ca5c-4b83-af72-c2a0faf47218",
+                  "name": "Order accepted",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"client_request_id\": \"<string>\",\n  \"brand\": \"<string>\",\n  \"face_value\": \"<number>\",\n  \"currency\": \"<string>\",\n  \"fulfilment_by\": \"tillo\",\n  \"fulfilment_parameters\": {},\n  \"personalisation\": {},\n  \"sector\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/digital/order",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "digital",
+                        "order"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"error\",\n  \"client_request_id\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:07:28.000Z",
+                  "updatedAt": "2026-10-21T21:07:28.000Z",
+                  "uid": "35240-39bc1788-ca5c-4b83-af72-c2a0faf47218"
+                }
+              ],
+              "createdAt": "2026-10-21T21:07:28.000Z",
+              "updatedAt": "2026-10-21T21:07:28.000Z",
+              "uid": "35240-d2fc5011-1128-43eb-a178-e74de15183af"
+            }
+          ],
+          "id": "8c951361-4a99-4992-8a2c-f3b24d8d71e6",
+          "createdAt": "2026-10-21T21:07:28.000Z",
+          "updatedAt": "2026-10-21T21:07:28.000Z",
+          "uid": "35240-8c951361-4a99-4992-8a2c-f3b24d8d71e6"
+        },
+        {
+          "name": "cancel",
+          "item": [
+            {
+              "name": "Cancel Order",
+              "id": "0a95f5a2-0d02-4a63-9d28-2014384cb0ca",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
                   "raw": "{\n  \"client_request_id\": \"<string>\",\n  \"brand\": \"<string>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"status\": \"string\",\n  \"message\": \"string\",\n  \"client_request_id\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "bd98a1e1-4d61-4787-9614-e06da1675248",
-          "name": "Refund Order",
-          "request": {
-            "name": "Refund Order",
-            "description": {
-              "content": "Refunds a completed gift card order. Funds are returned to the float.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "digital",
-                "refund"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"client_request_id\": \"<string>\",\n  \"brand\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"currency\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "283b8043-f3d1-4d07-8061-f0ca0e268788",
-              "name": "Refund processed",
-              "originalRequest": {
+                },
                 "url": {
-                  "path": [
-                    "digital",
-                    "refund"
-                  ],
+                  "raw": "{{baseUrl}}/digital/cancel",
                   "host": [
                     "{{baseUrl}}"
                   ],
-                  "query": [],
-                  "variable": []
+                  "path": [
+                    "digital",
+                    "cancel"
+                  ]
                 },
+                "description": "Cancels a pending or errored gift card order."
+              },
+              "response": [
+                {
+                  "id": "66e001ec-b1b9-4f60-924d-5a894caa3fd7",
+                  "name": "Order cancelled",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"client_request_id\": \"<string>\",\n  \"brand\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/digital/cancel",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "digital",
+                        "cancel"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"<string>\",\n  \"message\": \"<string>\",\n  \"client_request_id\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:07:28.000Z",
+                  "updatedAt": "2026-10-21T21:07:28.000Z",
+                  "uid": "35240-66e001ec-b1b9-4f60-924d-5a894caa3fd7"
+                }
+              ],
+              "createdAt": "2026-10-21T21:07:28.000Z",
+              "updatedAt": "2026-10-21T21:07:28.000Z",
+              "uid": "35240-0a95f5a2-0d02-4a63-9d28-2014384cb0ca"
+            }
+          ],
+          "id": "b075301b-5a66-4488-9a12-e9b8db0f4b9d",
+          "createdAt": "2026-10-21T21:07:28.000Z",
+          "updatedAt": "2026-10-21T21:07:28.000Z",
+          "uid": "35240-b075301b-5a66-4488-9a12-e9b8db0f4b9d"
+        },
+        {
+          "name": "refund",
+          "item": [
+            {
+              "name": "Refund Order",
+              "id": "52fd1a85-452a-4e4d-a78b-f30c75456b6a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
                   "raw": "{\n  \"client_request_id\": \"<string>\",\n  \"brand\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"currency\": \"<string>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
-                }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/digital/refund",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "digital",
+                    "refund"
+                  ]
+                },
+                "description": "Refunds a completed gift card order. Funds are returned to the float."
               },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "891e47ad-95c5-4546-ac7f-4e82d7db4780",
+                  "name": "Refund processed",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"client_request_id\": \"<string>\",\n  \"brand\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"currency\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/digital/refund",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "digital",
+                        "refund"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"<string>\",\n  \"message\": \"<string>\",\n  \"client_request_id\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:07:28.000Z",
+                  "updatedAt": "2026-10-21T21:07:28.000Z",
+                  "uid": "35240-891e47ad-95c5-4546-ac7f-4e82d7db4780"
                 }
               ],
-              "body": "{\n  \"status\": \"string\",\n  \"message\": \"string\",\n  \"client_request_id\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-21T21:07:28.000Z",
+              "updatedAt": "2026-10-21T21:07:28.000Z",
+              "uid": "35240-52fd1a85-452a-4e4d-a78b-f30c75456b6a"
             }
           ],
-          "event": [],
+          "id": "b28f5ff1-f59d-4ea0-9bc4-50df922c9dc6",
+          "createdAt": "2026-10-21T21:07:28.000Z",
+          "updatedAt": "2026-10-21T21:07:28.000Z",
+          "uid": "35240-b28f5ff1-f59d-4ea0-9bc4-50df922c9dc6"
+        }
+      ],
+      "id": "d0105337-27c3-49c0-85c7-2600636e2699",
+      "createdAt": "2026-10-21T21:07:28.000Z",
+      "updatedAt": "2026-10-21T21:07:28.000Z",
+      "uid": "35240-d0105337-27c3-49c0-85c7-2600636e2699"
+    },
+    {
+      "name": "order-status",
+      "item": [
+        {
+          "name": "Get Order Status",
+          "id": "c77accd7-4520-4323-aa7d-2030bf897b80",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "6b0e191f-c9c6-4fae-89fa-123d16adcb7f",
-          "name": "Get Order Status",
+          },
           "request": {
-            "name": "Get Order Status",
-            "description": {
-              "content": "Retrieves the status of a previously placed order using the client request ID.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "order-status"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "client_request_id",
-                  "value": "<string>",
-                  "description": "(Required) Client-supplied request ID"
-                },
-                {
-                  "disabled": false,
-                  "key": "brand",
-                  "value": "<string>",
-                  "description": "(Required) Brand identifier slug"
-                }
-              ],
-              "variable": []
-            },
+            "method": "GET",
             "header": [
               {
                 "key": "Accept",
                 "value": "application/json"
               }
             ],
-            "method": "GET",
-            "auth": null
+            "url": {
+              "raw": "{{baseUrl}}/order-status?client_request_id=<string>&brand=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "order-status"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Client-supplied request ID",
+                  "key": "client_request_id",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) Brand identifier slug",
+                  "key": "brand",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Retrieves the status of a previously placed order using the client request ID."
           },
           "response": [
             {
-              "id": "084a2fb2-bde8-462c-9549-e6b7abca970b",
+              "id": "646e8608-f36c-466d-8c2b-1628b8d85925",
               "name": "Order status returned",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "order-status"
-                  ],
+                  "raw": "{{baseUrl}}/order-status?client_request_id=<string>&brand=<string>",
                   "host": [
                     "{{baseUrl}}"
                   ],
+                  "path": [
+                    "order-status"
+                  ],
                   "query": [
                     {
+                      "description": "(Required) Client-supplied request ID",
                       "key": "client_request_id",
                       "value": "<string>"
                     },
                     {
+                      "description": "(Required) Brand identifier slug",
                       "key": "brand",
                       "value": "<string>"
                     }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"status\": \"pending\",\n  \"client_request_id\": \"string\",\n  \"tillo_order_id\": \"string\",\n  \"code\": \"string\",\n  \"face_value\": 7993.054493542446,\n  \"currency\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"status\": \"pending\",\n  \"client_request_id\": \"<string>\",\n  \"tillo_order_id\": \"<string>\",\n  \"code\": \"<string>\",\n  \"face_value\": \"<number>\",\n  \"currency\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T21:07:28.000Z",
+              "updatedAt": "2026-10-21T21:07:28.000Z",
+              "uid": "35240-646e8608-f36c-466d-8c2b-1628b8d85925"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T21:07:28.000Z",
+          "updatedAt": "2026-10-21T21:07:28.000Z",
+          "uid": "35240-c77accd7-4520-4323-aa7d-2030bf897b80"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://app.tillo.io/api/v2",
-      "key": "baseUrl"
+      "id": "4eb9d0f0-9a12-4d0a-a7c5-c6097a203bf5",
+      "createdAt": "2026-10-21T21:07:28.000Z",
+      "updatedAt": "2026-10-21T21:07:28.000Z",
+      "uid": "35240-4eb9d0f0-9a12-4d0a-a7c5-c6097a203bf5"
     }
   ],
   "auth": {
@@ -428,25 +467,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "Authorization"
+        "value": "Authorization",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "47577337-fd36-49b1-9c82-8de840161af5",
-    "name": "Tillo Gift Card Balance Orders API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Tillo Gift Card API enables businesses to issue digital and physical gift cards from 4,000+ global brands across 37 markets and 16 currencies. Supports synchronous and asynchronous card issuance, balance checking, stock checking, refunds, order status, float management, and brand catalog access. Authentication uses HMAC-SHA256 signatures.\n\nContact Support:\n Name: Tillo Support\n Email: onboarding@tillo.io",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://app.tillo.io/api/v2"
     }
-  }
+  ]
 }

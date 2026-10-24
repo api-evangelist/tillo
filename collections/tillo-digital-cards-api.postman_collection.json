@@ -1,422 +1,455 @@
 {
+  "info": {
+    "_postman_id": "d2811852-aba5-4eb4-91f8-16a1325bc9ea",
+    "name": "Tillo Gift Card Digital Cards API",
+    "description": "The Tillo Gift Card API enables businesses to issue digital and physical gift cards from 4,000+ global brands across 37 markets and 16 currencies. Supports synchronous and asynchronous card issuance, balance checking, stock checking, refunds, order status, float management, and brand catalog access. Authentication uses HMAC-SHA256 signatures.\n\nContact Support:\n Name: Tillo Support\n Email: onboarding@tillo.io",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T21:07:01.000Z",
+    "updatedAt": "2026-10-21T21:07:02.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-d2811852-aba5-4eb4-91f8-16a1325bc9ea"
+  },
   "item": [
     {
-      "id": "a230b54b-22db-433e-9265-a962325cb386",
-      "name": "Digital Cards",
-      "description": {
-        "content": "Digital gift card issuance",
-        "type": "text/plain"
-      },
+      "name": "digital",
       "item": [
         {
-          "id": "68cf061c-625b-4432-a470-d5983df4b605",
-          "name": "Issue Digital Gift Card",
-          "request": {
-            "name": "Issue Digital Gift Card",
-            "description": {
-              "content": "Synchronously issues a digital gift card for a specific brand and denomination. Returns a gift card code or URL immediately.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "digital",
-                "issue"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"client_request_id\": \"<string>\",\n  \"brand\": \"<string>\",\n  \"face_value\": \"<number>\",\n  \"currency\": \"<string>\",\n  \"fulfilment_by\": \"<string>\",\n  \"fulfilment_parameters\": \"<object>\",\n  \"personalisation\": \"<object>\",\n  \"sector\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
+          "name": "issue",
+          "item": [
             {
-              "id": "ab4681eb-df4e-46e5-aa93-d57301a68651",
-              "name": "Gift card issued successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "digital",
-                    "issue"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+              "name": "Issue Digital Gift Card",
+              "id": "7aee7a2f-69ab-4e0a-8519-28fe969ab7f3",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"client_request_id\": \"<string>\",\n  \"brand\": \"<string>\",\n  \"face_value\": \"<number>\",\n  \"currency\": \"<string>\",\n  \"fulfilment_by\": \"<string>\",\n  \"fulfilment_parameters\": \"<object>\",\n  \"personalisation\": \"<object>\",\n  \"sector\": \"<string>\"\n}",
+                  "raw": "{\n  \"client_request_id\": \"<string>\",\n  \"brand\": \"<string>\",\n  \"face_value\": \"<number>\",\n  \"currency\": \"<string>\",\n  \"fulfilment_by\": \"tillo\",\n  \"fulfilment_parameters\": {},\n  \"personalisation\": {},\n  \"sector\": \"<string>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"status\": \"error\",\n  \"code\": \"string\",\n  \"barcode\": \"string\",\n  \"pin\": \"string\",\n  \"redemption_url\": \"string\",\n  \"expiry_date\": \"string\",\n  \"face_value\": 6884.2989103868595,\n  \"currency\": \"string\",\n  \"client_request_id\": \"string\",\n  \"tillo_order_id\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "494cfc59-b53d-4ffb-b4ec-1b497f91858c",
-              "name": "Bad Request",
-              "originalRequest": {
+                },
                 "url": {
-                  "path": [
-                    "digital",
-                    "issue"
-                  ],
+                  "raw": "{{baseUrl}}/digital/issue",
                   "host": [
                     "{{baseUrl}}"
                   ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"client_request_id\": \"<string>\",\n  \"brand\": \"<string>\",\n  \"face_value\": \"<number>\",\n  \"currency\": \"<string>\",\n  \"fulfilment_by\": \"<string>\",\n  \"fulfilment_parameters\": \"<object>\",\n  \"personalisation\": \"<object>\",\n  \"sector\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "4b98b598-ef06-4a1e-9e76-dfb23ac30330",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "url": {
                   "path": [
                     "digital",
                     "issue"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
+                  ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"client_request_id\": \"<string>\",\n  \"brand\": \"<string>\",\n  \"face_value\": \"<number>\",\n  \"currency\": \"<string>\",\n  \"fulfilment_by\": \"<string>\",\n  \"fulfilment_parameters\": \"<object>\",\n  \"personalisation\": \"<object>\",\n  \"sector\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
+                "description": "Synchronously issues a digital gift card for a specific brand and denomination. Returns a gift card code or URL immediately."
               },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "text/plain"
+                  "id": "5ab220e1-54e6-43ad-8767-227e2fca16c6",
+                  "name": "Gift card issued successfully",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"client_request_id\": \"<string>\",\n  \"brand\": \"<string>\",\n  \"face_value\": \"<number>\",\n  \"currency\": \"<string>\",\n  \"fulfilment_by\": \"tillo\",\n  \"fulfilment_parameters\": {},\n  \"personalisation\": {},\n  \"sector\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/digital/issue",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "digital",
+                        "issue"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"error\",\n  \"code\": \"<string>\",\n  \"barcode\": \"<string>\",\n  \"pin\": \"<string>\",\n  \"redemption_url\": \"<string>\",\n  \"expiry_date\": \"<string>\",\n  \"face_value\": \"<number>\",\n  \"currency\": \"<string>\",\n  \"client_request_id\": \"<string>\",\n  \"tillo_order_id\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:07:02.000Z",
+                  "updatedAt": "2026-10-21T21:07:02.000Z",
+                  "uid": "35240-5ab220e1-54e6-43ad-8767-227e2fca16c6"
+                },
+                {
+                  "id": "0aca3591-ef41-4b62-bae8-2d3bb16ccd0e",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"client_request_id\": \"<string>\",\n  \"brand\": \"<string>\",\n  \"face_value\": \"<number>\",\n  \"currency\": \"<string>\",\n  \"fulfilment_by\": \"tillo\",\n  \"fulfilment_parameters\": {},\n  \"personalisation\": {},\n  \"sector\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/digital/issue",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "digital",
+                        "issue"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T21:07:02.000Z",
+                  "updatedAt": "2026-10-21T21:07:02.000Z",
+                  "uid": "35240-0aca3591-ef41-4b62-bae8-2d3bb16ccd0e"
+                },
+                {
+                  "id": "f0d50d31-d698-4d2c-ac18-c3ccec41d21a",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"client_request_id\": \"<string>\",\n  \"brand\": \"<string>\",\n  \"face_value\": \"<number>\",\n  \"currency\": \"<string>\",\n  \"fulfilment_by\": \"tillo\",\n  \"fulfilment_parameters\": {},\n  \"personalisation\": {},\n  \"sector\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/digital/issue",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "digital",
+                        "issue"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T21:07:02.000Z",
+                  "updatedAt": "2026-10-21T21:07:02.000Z",
+                  "uid": "35240-f0d50d31-d698-4d2c-ac18-c3ccec41d21a"
                 }
               ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
+              "createdAt": "2026-10-21T21:07:02.000Z",
+              "updatedAt": "2026-10-21T21:07:02.000Z",
+              "uid": "35240-7aee7a2f-69ab-4e0a-8519-28fe969ab7f3"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "9f6554e6-871e-4c5e-aa2c-ebffc1d74422",
+          "createdAt": "2026-10-21T21:07:02.000Z",
+          "updatedAt": "2026-10-21T21:07:02.000Z",
+          "uid": "35240-9f6554e6-871e-4c5e-aa2c-ebffc1d74422"
         },
         {
-          "id": "697f0884-7fff-47f5-b398-306e2310ab3b",
-          "name": "Order Digital Gift Card (Async)",
-          "request": {
-            "name": "Order Digital Gift Card (Async)",
-            "description": {
-              "content": "Asynchronously orders a digital gift card. Used for brands that require asynchronous processing. Returns a status and order reference.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "digital",
-                "order"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"client_request_id\": \"<string>\",\n  \"brand\": \"<string>\",\n  \"face_value\": \"<number>\",\n  \"currency\": \"<string>\",\n  \"fulfilment_by\": \"<string>\",\n  \"fulfilment_parameters\": \"<object>\",\n  \"personalisation\": \"<object>\",\n  \"sector\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
+          "name": "order",
+          "item": [
             {
-              "id": "711837d4-139f-4f5a-93cd-8df5c84ebfaa",
-              "name": "Order accepted",
-              "originalRequest": {
+              "name": "Order Digital Gift Card (Async)",
+              "id": "a4c5af08-9226-44d0-8242-0e66d51d8362",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"client_request_id\": \"<string>\",\n  \"brand\": \"<string>\",\n  \"face_value\": \"<number>\",\n  \"currency\": \"<string>\",\n  \"fulfilment_by\": \"tillo\",\n  \"fulfilment_parameters\": {},\n  \"personalisation\": {},\n  \"sector\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
                 "url": {
+                  "raw": "{{baseUrl}}/digital/order",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "digital",
                     "order"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
+                  ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"client_request_id\": \"<string>\",\n  \"brand\": \"<string>\",\n  \"face_value\": \"<number>\",\n  \"currency\": \"<string>\",\n  \"fulfilment_by\": \"<string>\",\n  \"fulfilment_parameters\": \"<object>\",\n  \"personalisation\": \"<object>\",\n  \"sector\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
+                "description": "Asynchronously orders a digital gift card. Used for brands that require asynchronous processing. Returns a status and order reference."
               },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "cf4043f1-1f90-4953-9d95-ee25f394e10e",
+                  "name": "Order accepted",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"client_request_id\": \"<string>\",\n  \"brand\": \"<string>\",\n  \"face_value\": \"<number>\",\n  \"currency\": \"<string>\",\n  \"fulfilment_by\": \"tillo\",\n  \"fulfilment_parameters\": {},\n  \"personalisation\": {},\n  \"sector\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/digital/order",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "digital",
+                        "order"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"pending\",\n  \"client_request_id\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:07:02.000Z",
+                  "updatedAt": "2026-10-21T21:07:02.000Z",
+                  "uid": "35240-cf4043f1-1f90-4953-9d95-ee25f394e10e"
                 }
               ],
-              "body": "{\n  \"status\": \"error\",\n  \"client_request_id\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-21T21:07:02.000Z",
+              "updatedAt": "2026-10-21T21:07:02.000Z",
+              "uid": "35240-a4c5af08-9226-44d0-8242-0e66d51d8362"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "a44b384e-6db7-4d6c-b3ae-c97d68b94c5f",
+          "createdAt": "2026-10-21T21:07:02.000Z",
+          "updatedAt": "2026-10-21T21:07:02.000Z",
+          "uid": "35240-a44b384e-6db7-4d6c-b3ae-c97d68b94c5f"
         },
         {
-          "id": "d639ccec-36d6-4e2d-a193-5329653ca0bb",
-          "name": "Check Stock Availability",
-          "request": {
-            "name": "Check Stock Availability",
-            "description": {
-              "content": "Checks current denomination availability for fixed-denomination brands.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "digital",
-                "check-stock"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"brand\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
+          "name": "check-stock",
+          "item": [
             {
-              "id": "d1f47389-6a4b-4e26-8205-66f7ae5b90d8",
-              "name": "Stock availability returned",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "digital",
-                    "check-stock"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+              "name": "Check Stock Availability",
+              "id": "0353d7a0-fcad-4bd8-a9fb-ddf0cc1ec41d",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
                   "raw": "{\n  \"brand\": \"<string>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
-                }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/digital/check-stock",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "digital",
+                    "check-stock"
+                  ]
+                },
+                "description": "Checks current denomination availability for fixed-denomination brands."
               },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "76fedf5b-084a-4c1e-beea-c7912a520658",
+                  "name": "Stock availability returned",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"brand\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/digital/check-stock",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "digital",
+                        "check-stock"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"<string>\",\n  \"denominations\": [\n    {\n      \"value\": \"<number>\",\n      \"available\": \"<boolean>\",\n      \"stock_count\": \"<integer>\"\n    },\n    {\n      \"value\": \"<number>\",\n      \"available\": \"<boolean>\",\n      \"stock_count\": \"<integer>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T21:07:02.000Z",
+                  "updatedAt": "2026-10-21T21:07:02.000Z",
+                  "uid": "35240-76fedf5b-084a-4c1e-beea-c7912a520658"
                 }
               ],
-              "body": "{\n  \"status\": \"string\",\n  \"denominations\": [\n    {\n      \"value\": 6890.848894093242,\n      \"available\": true,\n      \"stock_count\": 2183\n    },\n    {\n      \"value\": 742.5147911126118,\n      \"available\": true,\n      \"stock_count\": 8268\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-21T21:07:02.000Z",
+              "updatedAt": "2026-10-21T21:07:02.000Z",
+              "uid": "35240-0353d7a0-fcad-4bd8-a9fb-ddf0cc1ec41d"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "68c1e0a3-4fec-480c-be2a-4ca29679173d",
+          "createdAt": "2026-10-21T21:07:02.000Z",
+          "updatedAt": "2026-10-21T21:07:02.000Z",
+          "uid": "35240-68c1e0a3-4fec-480c-be2a-4ca29679173d"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://app.tillo.io/api/v2",
-      "key": "baseUrl"
+      "id": "312818fc-241a-4576-becc-21ebc4db01f0",
+      "createdAt": "2026-10-21T21:07:02.000Z",
+      "updatedAt": "2026-10-21T21:07:02.000Z",
+      "uid": "35240-312818fc-241a-4576-becc-21ebc4db01f0"
     }
   ],
   "auth": {
@@ -424,25 +457,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "Authorization"
+        "value": "Authorization",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "73fe733b-b9c4-40e7-a93b-3fbd8f308401",
-    "name": "Tillo Gift Card Balance Digital Cards API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Tillo Gift Card API enables businesses to issue digital and physical gift cards from 4,000+ global brands across 37 markets and 16 currencies. Supports synchronous and asynchronous card issuance, balance checking, stock checking, refunds, order status, float management, and brand catalog access. Authentication uses HMAC-SHA256 signatures.\n\nContact Support:\n Name: Tillo Support\n Email: onboarding@tillo.io",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://app.tillo.io/api/v2"
     }
-  }
+  ]
 }
