@@ -1,4 +1,4 @@
-# Tillo (tillo)
+# Tillo
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,90 +66,166 @@
 
 Tillo is an award-winning gift card API platform connecting businesses to 4,000+ global brands across 37 markets and 16 currencies. The REST API supports digital and physical gift card issuance, balance checking, float management, and brand catalog access. Authentication uses HMAC-SHA256 signatures.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/tillo/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/tillo/refs/heads/main/apis.yml)
+**Areas:** Finance · Gift Cards · Payments · Rewards · Incentives · Loyalty & Incentives
 
-## Scope
+## Tillo on APIs.io
 
-- **Type:** Index
-- **Position:** Consumer
-- **Access:** 3rd-Party
+Everything profiled for Tillo is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/tillo/](https://apis.io/providers/tillo/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (5)
 
-- Finance
-- Gift Cards
-- Payments
-- Rewards
-- Incentives
+- [Tillo Balance API](https://apis.io/apis/tillo/tillo-balance-api/) — Balance checking operations
+- [Tillo Brands API](https://apis.io/apis/tillo/tillo-brands-api/) — Brand catalog and information
+- [Tillo Digital Cards API](https://apis.io/apis/tillo/tillo-digital-cards-api/) — Digital gift card issuance
+- [Tillo Float API](https://apis.io/apis/tillo/tillo-float-api/) — Float account management
+- [Tillo Orders API](https://apis.io/apis/tillo/tillo-orders-api/) — Order management and status
 
-## Timestamps
+### Published properties
 
-- **Created:** 2025-02-08
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Agentic access (1)
 
-### Tillo Gift Card API
+Which operations an agent can call, which act, and which need a human in the loop.
 
-The Tillo Gift Card API enables businesses to issue digital and physical gift cards from 4,000+ global brands. Supports synchronous and asynchronous card issuance, balance checking, refunds, order status checking, and brand catalog retrieval.
+- [Tillo Agentic Access](https://apis.io/agentic-access/tillo/tillo-agentic-access/)
 
-- **Human URL:** [https://www.tillo.io/gift-card-api](https://www.tillo.io/gift-card-api)
-- **Base URL:** `https://app.tillo.io`
+#### JSON Schema (2)
 
-#### Tags
+The data models the API reads and writes.
 
-- Finance
-- Gift Cards
-- Payments
-- Rewards
+- [Tillo Brand](https://apis.io/schemas/tillo/tillo-brand/)
+- [Tillo Gift Card](https://apis.io/schemas/tillo/tillo-gift-card/)
 
-#### Properties
+#### JSON Structure (1)
 
-- [Documentation](https://tillo.tech/v2_docs/)
-- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/tillo/refs/heads/main/openapi/tillo-gift-card-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/tillo-gift-card.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/tillo-gift-card.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Data models expressed in JSON Structure.
 
-### Tillo Float Management API
+- [Tillo Brand Structure](https://apis.io/json-structure/tillo/tillo-brand-structure/)
 
-Manages Tillo float accounts including balance retrieval, payment transfer requests, and transfer status tracking.
+#### JSON-LD (1)
 
-- **Human URL:** [https://tillo.tech/v2_docs/floats.html](https://tillo.tech/v2_docs/floats.html)
-- **Base URL:** `https://app.tillo.io`
+Linked-data contexts for the provider's vocabulary.
 
-#### Tags
+- [Tillo Context](https://apis.io/jsonld/tillo/tillo-context/)
 
-- Finance
-- Float
-- Payments
+#### Vocabulary (1)
 
-#### Properties
+The provider's domain terms, defined.
 
-- [Documentation](https://tillo.tech/v2_docs/floats.html)
-- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/tillo/refs/heads/main/openapi/tillo-gift-card-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/tillo-gift-card.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/tillo-gift-card.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Tillo Vocabulary](https://apis.io/vocabularies/tillo/tillo-vocabulary/)
 
-## Common Properties
+#### Examples (2)
 
-- [LinkedIn](https://www.linkedin.com/company/tillo)
+Example requests and responses.
+
+- [Tillo Issuedigitalcard Example](https://apis.io/examples/tillo/tillo-issueDigitalCard-example/)
+- [Tillo Listbrands Example](https://apis.io/examples/tillo/tillo-listBrands-example/)
+
+#### Collections (6)
+
+Postman and Open Collection request collections.
+
+- [Tillo Gift Card Balance API](https://apis.io/collections/tillo/open-tillo-balance-api/)
+- [Tillo Gift Card Balance Brands API](https://apis.io/collections/tillo/open-tillo-brands-api/)
+- [Tillo Gift Card Balance Digital Cards API](https://apis.io/collections/tillo/open-tillo-digital-cards-api/)
+- [Tillo Gift Card Balance Float API](https://apis.io/collections/tillo/open-tillo-float-api/)
+- [Tillo Gift Card API](https://apis.io/collections/tillo/open-tillo-gift-card/)
+- [Tillo Gift Card Balance Orders API](https://apis.io/collections/tillo/open-tillo-orders-api/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [Tillo — jsonschema rules](https://apis.io/rules/tillo/tillo-jsonschema-spectral-rules/)
+- [Tillo API Rules](https://apis.io/rules/tillo/tillo-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Tillo Authentication](https://apis.io/security/tillo/tillo-authentication/)
+- [Tillo Domain Security](https://apis.io/security/tillo/tillo-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Tillo Plans Pricing](https://apis.io/plans/tillo/tillo-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Tillo Rate Limits](https://apis.io/rate-limits/tillo/tillo-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Tillo Finops](https://apis.io/finops/tillo/tillo-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://www.tillo.io/)
-- [Portal](https://www.tillo.io/gift-card-api)
 - [Documentation](https://tillo.tech/v2_docs/)
-- [Getting Started](https://tillo.tech/v2_docs/getting_started.html)
-- [Authentication](https://tillo.tech/v2_docs/authentication.html)
-- [GitHub Organization](https://github.com/tilloops)
-- [GitHub Repository](https://github.com/tilloops/tillo)
-- [Blog](https://www.tillo.io/blog)
-- [Contact](https://www.tillo.io/contact)
+- [Getting started](https://tillo.tech/v2_docs/getting_started.html)
 - [Pricing](https://www.tillo.io/pricing)
-- [Terms of Service](https://www.tillo.io/legal)
-- [Postman  Collection](https://api.tillo.tech/)
-- [Sign Up](https://app.tillo.io/)
-- [Use  Cases](https://www.tillo.io/)
-- [Integrations](https://www.tillo.io/partners)
+- [Blog](https://www.tillo.io/blog)
+- [Terms of service](https://www.tillo.io/legal)
+- [GitHub](https://github.com/tilloops)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 36.3** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 55.3 |
+| Contract governance | 13.6 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 50.0 |
+| Access clarity | 21.1 |
+
+**Agent readiness 19.6** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 15.2** — Payments
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/tillo/](https://apis.io/providers/tillo/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Tillo: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/tillo/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
